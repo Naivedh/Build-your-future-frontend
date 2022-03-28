@@ -1,0 +1,29 @@
+.navbar{
+    padding: .5rem 1rem;
+    background-color: #2b2a33 !important;
+}
+.navbar row{
+    text-align: center;
+}
+.navbar > a {
+    color: white!important;
+}
+.navbar__img {
+    /* height: 60px;  */
+    /* width: 130px!important; */
+    margin-left: .7rem;
+}
+.navbar__p {
+    margin-bottom: 0!important;
+    font-size: medium; 
+    text-align: left;
+}
+.search__form{
+    display: inline-flex;
+}
+.form-control, .navbar__btn {
+    border-radius: 0;
+}
+.collapse input, .collapse ul{
+    padding: 0 1rem;
+}

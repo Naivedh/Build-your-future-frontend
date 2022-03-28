@@ -1,0 +1,47 @@
+{
+    "instructors": [
+        {   "id":"1",
+            "name": "Nurcan Yuruk",
+            "about": "Expertise in databases and web languages",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
+            "img":"_1.webp",
+            "courses": [
+                {
+                    "id": "asdkl;askdlak;sd",
+                    "title": "Web Programming",
+                    "description": "Awesome course :)",
+                    "rating": 4.6
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.8
+                }
+            ],
+            "stars": 4.7
+        },
+        {   
+            "id":"2",
+            "name": "Chris Davis",
+            "about": "Expertise in databases and Artificial Intelligence",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
+            "img":"_2.webp",
+            "courses": [
+                {
+                    "id": "qweqweqwe",
+                    "title": "Artificial Intelligence",
+                    "description": "Awesome course :)",
+                    "rating": 4.2
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.6
+                }
+            ],
+            "stars": 4.4
+        }
+    ]
+}

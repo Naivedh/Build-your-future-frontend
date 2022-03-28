@@ -1,0 +1,19 @@
+footer{
+    background-color: #6c757d!important;
+    color: white;
+    position: fixed;
+    width: 100%;
+}
+.footer__container{
+    padding: 4rem 0 3rem 0;
+}
+footer a {
+    color: white;
+}
+a:hover i {
+    color: white !important;
+}
+
+.fab_class{
+    margin: 1rem;
+}
