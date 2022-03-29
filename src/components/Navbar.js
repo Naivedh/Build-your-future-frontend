@@ -6,6 +6,10 @@ const Navbar = (props) => {
     const [ search, setSearch ] = useSearch();
     const [ filterText, setFiltertext ] = useFilterSearch();
 
+    const applySearch = ({ target: { value }}) => {
+      setFiltertext(value);
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <Link className="navbar-brand" to="/" >
@@ -22,7 +26,7 @@ const Navbar = (props) => {
           {
             search? 
             <form className="form-inline my-2 my-lg-0 search__form ms-auto">
-                      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={filterText} onChange={(e) => setFiltertext(e.target.value)}/>
+                      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={filterText} onChange={applySearch}/>
                       <button className="navbar__btn btn btn-secondary"  type="submit"><i className="bi bi-search"></i></button>
             </form>
             : <p className="ms-auto"></p>

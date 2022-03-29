@@ -5,8 +5,9 @@ import '../css/Home.css';
 import { useFilterSearch ,useSearch } from '../SearchContextProvider';
 
 const Home = (props) => {
-    let data = useTutor().instructors;
+    const originalData = useTutor().instructors;
     // const [data, setData] = useState();
+    const [data, setData] = useState(useTutor().instructors);
     const [search, setSearch] = useSearch();
     const [filterText, setFiltertext] = useFilterSearch();
 
@@ -18,9 +19,26 @@ const Home = (props) => {
         return () => {
             setSearch(false);
         }
-    })
+    }, []);
 
-   
+   useEffect(() => {
+    if (filterText !== "") {
+        const instructorNameMatches = originalData.filter(instructor => instructor.name.toLowerCase().startsWith(filterText));
+        const courseNameMatches = originalData.filter(instructor => {
+            const courses = instructor.courses;
+            for(let i=0; i<courses.length; i++) {
+                const { title } = courses[i];
+                if (title.toLowerCase().startsWith(filterText)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+        setData([...instructorNameMatches, ...courseNameMatches]);
+    } else {
+        setData(originalData);
+    }
+   }, [filterText])
     
     
     const renderCourseNames = (courses) => {
