@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useTutor } from '../TutorContextProvider';
 import '../css/Home.css';
@@ -6,10 +6,13 @@ import { useFilterSearch ,useSearch } from '../SearchContextProvider';
 
 const Home = (props) => {
     let data = useTutor().instructors;
+    // const [data, setData] = useState();
     const [search, setSearch] = useSearch();
     const [filterText, setFiltertext] = useFilterSearch();
 
     useEffect(()=>{
+        // setData(temp);
+        // setData(data.filter(element => element.name.indexOf(filterText) !== -1));
         //navbar
         setSearch(true);
         return () => {
@@ -17,7 +20,7 @@ const Home = (props) => {
         }
     })
 
-    
+   
     
     
     const renderCourseNames = (courses) => {
