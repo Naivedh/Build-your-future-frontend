@@ -1,0 +1,35 @@
+.tutor__tutor__image{
+    width: 25rem;
+    height: 25rem;
+    border-radius: 50%;
+}
+.tutor__tutor__image__container{
+    margin: 3rem;
+    text-align: center;
+}
+
+.tutor__tutor__name{
+    margin: 3rem 0rem;
+    font-size: 30px;
+    font-weight: 700;
+}
+.tutor__tutor__about, .tutor__tutor__email{
+    margin: 2rem 0rem;
+    font-size: 25px;
+    font-weight: 500;
+}
+.tutor__tutor__stars{
+    margin: 2rem 0;
+}
+.tutor__tutor__stars i {
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(238, 204, 52);
+    padding: .5rem;
+}
+.tutor__tutor__desc{
+    margin: 1rem 0rem;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: justify;
+}

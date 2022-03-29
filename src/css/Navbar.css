@@ -5,12 +5,10 @@
 .navbar row{
     text-align: center;
 }
-.navbar > a {
-    color: white!important;
+.navbar > a i:hover {
+    color: black!important;
 }
 .navbar__img {
-    /* height: 60px;  */
-    /* width: 130px!important; */
     margin-left: .7rem;
 }
 .navbar__p {

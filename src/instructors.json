@@ -1,8 +1,10 @@
 {
     "instructors": [
         {   "id":"1",
+            "email":"nurcanyuruk@utdallas.edu",
             "name": "Nurcan Yuruk",
             "about": "Expertise in databases and web languages",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
             "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
             "img":"_1.webp",
             "courses": [
@@ -23,8 +25,195 @@
         },
         {   
             "id":"2",
+            "email":"chrisdavis@utdallas.edu",
             "name": "Chris Davis",
             "about": "Expertise in databases and Artificial Intelligence",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
+            "img":"_2.webp",
+            "courses": [
+                {
+                    "id": "qweqweqwe",
+                    "title": "Artificial Intelligence",
+                    "description": "Awesome course :)",
+                    "rating": 4.2
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.6
+                }
+            ],
+            "stars": 4.4
+        },
+        {   "id":"3",
+            "email":"nurcanyuruk@utdallas.edu",
+            "name": "Nurcan Yuruk",
+            "about": "Expertise in databases and web languages",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
+            "img":"_1.webp",
+            "courses": [
+                {
+                    "id": "asdkl;askdlak;sd",
+                    "title": "Web Programming",
+                    "description": "Awesome course :)",
+                    "rating": 4.6
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.8
+                }
+            ],
+            "stars": 4.7
+        },
+        {   
+            "id":"4",
+            "email":"chrisdavis@utdallas.edu",
+            "name": "Chris Davis",
+            "about": "Expertise in databases and Artificial Intelligence",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
+            "img":"_2.webp",
+            "courses": [
+                {
+                    "id": "qweqweqwe",
+                    "title": "Artificial Intelligence",
+                    "description": "Awesome course :)",
+                    "rating": 4.2
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.6
+                }
+            ],
+            "stars": 4.4
+        }, {   "id":"5",
+            "email":"nurcanyuruk@utdallas.edu",
+            "name": "Nurcan Yuruk",
+            "about": "Expertise in databases and web languages",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
+            "img":"_1.webp",
+            "courses": [
+                {
+                    "id": "asdkl;askdlak;sd",
+                    "title": "Web Programming",
+                    "description": "Awesome course :)",
+                    "rating": 4.6
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.8
+                }
+            ],
+            "stars": 4.7
+        },
+        {   
+            "id":"6",
+            "email":"chrisdavis@utdallas.edu",
+            "name": "Chris Davis",
+            "about": "Expertise in databases and Artificial Intelligence",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
+            "img":"_2.webp",
+            "courses": [
+                {
+                    "id": "qweqweqwe",
+                    "title": "Artificial Intelligence",
+                    "description": "Awesome course :)",
+                    "rating": 4.2
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.6
+                }
+            ],
+            "stars": 4.4
+        }, {   "id":"7",
+            "email":"nurcanyuruk@utdallas.edu",
+            "name": "Nurcan Yuruk",
+            "about": "Expertise in databases and web languages",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
+            "img":"_1.webp",
+            "courses": [
+                {
+                    "id": "asdkl;askdlak;sd",
+                    "title": "Web Programming",
+                    "description": "Awesome course :)",
+                    "rating": 4.6
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.8
+                }
+            ],
+            "stars": 4.7
+        },
+        {   
+            "id":"8",
+            "email":"chrisdavis@utdallas.edu",
+            "name": "Chris Davis",
+            "about": "Expertise in databases and Artificial Intelligence",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
+            "img":"_2.webp",
+            "courses": [
+                {
+                    "id": "qweqweqwe",
+                    "title": "Artificial Intelligence",
+                    "description": "Awesome course :)",
+                    "rating": 4.2
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.6
+                }
+            ],
+            "stars": 4.4
+        }, {   "id":"9",
+            "email":"nurcanyuruk@utdallas.edu",
+            "name": "Nurcan Yuruk",
+            "about": "Expertise in databases and web languages",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
+            "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/07/Nurcan-Yuruk-july-29-2020-1.png",
+            "img":"_1.webp",
+            "courses": [
+                {
+                    "id": "asdkl;askdlak;sd",
+                    "title": "Web Programming",
+                    "description": "Awesome course :)",
+                    "rating": 4.6
+                },
+                {
+                    "id": "asdka;sdkla;skkla",
+                    "title": "Database Design",
+                    "description": "Pretty cool course:)",
+                    "rating": 4.8
+                }
+            ],
+            "stars": 4.7
+        },
+        {   
+            "id":"10",
+            "email":"chrisdavis@utdallas.edu",
+            "name": "Chris Davis",
+            "about": "Expertise in databases and Artificial Intelligence",
+            "desc":"Placerat duis ultricies lacus sed turpis tincidunt id aliquet risus. Posuere ac ut consequat semper viverra nam libero. Risus quis varius quam quisque. Sagittis purus sit amet volutpat consequat mauris nunc congue nisi. Donec enim diam vulputate ut pharetra sit amet. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam. Enim ut tellus elementum sagittis. Ut eu sem integer vitae justo eget magna fermentum iaculis. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Vulputate mi sit amet mauris commodo quis imperdiet. Ornare arcu odio ut sem nulla pharetra diam sit amet. Cursus in hac habitasse platea. Cursus sit amet dictum sit amet justo donec enim diam. Lacinia quis vel eros donec ac odio. In egestas erat imperdiet sed euismod nisi porta lorem mollis. Fringilla phasellus faucibus scelerisque eleifend donec. Pharetra sit amet aliquam id diam maecenas ultricies. Duis ut diam quam nulla. Ornare aenean euismod elementum nisi quis eleifend quam. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.",
             "imageUrl": "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2015/02/Davis_Chris.jpg",
             "img":"_2.webp",
             "courses": [
