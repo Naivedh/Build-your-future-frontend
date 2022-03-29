@@ -35,12 +35,12 @@ const Home = (props) => {
     const renderData = (data) => 
         data.map(tutor => {
             return (
-                <div className="col-md-4" key={tutor.id}>
+                <div className="col-lg-4" key={tutor.id}>
                     <div className="card">
                         <div className="row g-0">
                             <div className="col-md-4 home__image__container">
                                 <div style={{height: "100%"}}>
-                                    <img src={tutor.imageUrl} className=" img-fluid home__tutor__image" alt={tutor.name}/>
+                                    <img src={tutor.imageUrl} className="home__tutor__image" alt={tutor.name}/>
                                 </div>
                             </div>
                             <div className="col-md-8">
@@ -57,9 +57,11 @@ const Home = (props) => {
                                         {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
                                     </small>
                                 </p>
-                                <button type="button" className="btn btn-secondary my-2">
-                                    <Link to={`/tutor/${tutor.id}`}>Profile</Link>
-                                </button>
+                                <Link to={`/tutor/${tutor.id}`}>
+                                    <button type="button" className="btn btn-secondary my-2">
+                                        Profile
+                                    </button>
+                                </Link>
                             </div>
                             </div>
                         </div>
