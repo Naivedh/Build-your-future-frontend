@@ -33,3 +33,15 @@
     font-weight: 400;
     text-align: justify;
 }
+@media only screen and (max-width: 450px) {
+    .tutor__tutor__image{
+        width: 16rem;
+        height:16rem;
+    }
+    .tutor__tutor__email{
+        font-size: 20px;
+    }
+    footer .row{
+        --bs-gutter-x: 0;
+    }
+  }

@@ -6,14 +6,11 @@ import { useFilterSearch ,useSearch } from '../SearchContextProvider';
 
 const Home = (props) => {
     const originalData = useTutor().instructors;
-    // const [data, setData] = useState();
     const [data, setData] = useState(useTutor().instructors);
     const [search, setSearch] = useSearch();
     const [filterText, setFiltertext] = useFilterSearch();
 
     useEffect(()=>{
-        // setData(temp);
-        // setData(data.filter(element => element.name.indexOf(filterText) !== -1));
         //navbar
         setSearch(true);
         return () => {
@@ -23,12 +20,12 @@ const Home = (props) => {
 
    useEffect(() => {
     if (filterText !== "") {
-        const instructorNameMatches = originalData.filter(instructor => instructor.name.toLowerCase().startsWith(filterText));
+        const instructorNameMatches = originalData.filter(instructor => instructor.name.toLowerCase().startsWith(filterText.toLowerCase()));
         const courseNameMatches = originalData.filter(instructor => {
             const courses = instructor.courses;
             for(let i=0; i<courses.length; i++) {
                 const { title } = courses[i];
-                if (title.toLowerCase().startsWith(filterText)) {
+                if (title.toLowerCase().startsWith(filterText.toLowerCase())) {
                     return true;
                 }
             }
