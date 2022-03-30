@@ -11,6 +11,7 @@ const Routing = (props) => {
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/tutor/:id" element={<Tutor/>}/>
+                <Route path="/error" element={<Error/>}/>
                 <Route path="*" element={<Error/>}/>
             </Routes>
         </div>

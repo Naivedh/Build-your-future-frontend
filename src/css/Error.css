@@ -3,3 +3,11 @@
     font-weight: 800;
     text-align: center;
 }
+.error__home{
+    font-size: 20px;
+    font-weight: 400;
+}
+.error__home > *{
+    padding: 0rem .7rem;
+    margin: 1rem 0;
+}
