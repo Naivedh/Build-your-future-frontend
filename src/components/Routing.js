@@ -7,7 +7,7 @@ import Tutor from './Tutor';
 
 const Routing = (props) => {
     return (
-        <div style={{minHeight:"100vh"}}>
+        <div style={{minHeight:"70vh"}}>
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/tutor/:id" element={<Tutor/>}/>

@@ -7,10 +7,13 @@
 .card{
     margin: .5rem;
 }
+
 .home__tutor__image{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .home__image__container{
     display: flex;
