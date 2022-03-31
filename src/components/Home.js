@@ -54,7 +54,7 @@ const Home = (props) => {
                     <div className="card">
                         <div className="row g-0">
                             <div className="col-md-4 home__image__container">
-                                    <img src={tutor.imageUrl} className="home__tutor__image" alt={tutor.name}/>
+                                    <img src={`./static/${tutor.img}`} className="home__tutor__image" alt={tutor.name}/>
                             </div>
                             <div className="col-md-8">
                             <div className="card-body">

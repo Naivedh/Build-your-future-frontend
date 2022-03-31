@@ -26,7 +26,7 @@ const Tutor = (props) => {
             <div className="row">
                 <div className="col-lg-6">
                     <div className="tutor__tutor__image__container">
-                        <img src={tutor.imageUrl} className="tutor__tutor__image" alt={tutor.name}/>
+                        <img src={`../../static/${tutor.img}`} className="tutor__tutor__image" alt={tutor.name}/>
                         <p className="tutor__tutor__email">{tutor.email}</p>
                         <p className="tutor__tutor__stars">
                             {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
