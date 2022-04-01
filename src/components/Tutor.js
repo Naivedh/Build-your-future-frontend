@@ -4,7 +4,7 @@ import { useTutor } from '../TutorContextProvider';
 
 import "../css/Tutor.css"
 
-const Tutor = (props) => {
+const Tutor = () => {
     const data = useTutor();
     const params = useParams();
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Tutor = (props) => {
         if(tutor === undefined){
             navigate("/error")
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (tutor === undefined) {

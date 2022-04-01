@@ -9,6 +9,7 @@ const Home = (props) => {
     const [data, setData] = useState(useTutor().instructors);
     const [search, setSearch] = useSearch();
     const [filterText, setFiltertext] = useFilterSearch();
+    
 
     useEffect(()=>{
         //navbar
@@ -16,6 +17,7 @@ const Home = (props) => {
         return () => {
             setSearch(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
    useEffect(() => {
@@ -35,6 +37,7 @@ const Home = (props) => {
     } else {
         setData(originalData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [filterText])
     
     
@@ -50,34 +53,19 @@ const Home = (props) => {
     const renderData = (data) => 
         data.map(tutor => {
             return (
-                <div className="col-lg-4" key={tutor._id}>
-                    <div className="card">
-                        <div className="row g-0">
-                            <div className="col-md-4 home__image__container">
-                                    <img src={`./static/${tutor.img}`} className="home__tutor__image img-thumbnail" alt={tutor.name}/>
-                            </div>
-                            <div className="col-md-8">
-                            <div className="card-body">
-                                <h5 className="card-title">{tutor.name}</h5>
-                                <p className="card-text mb-2">{tutor.about}</p>
-                                <p className="card-text mb-0">
-                                    <small className="text-muted">
-                                        {renderCourseNames(tutor.courses)}
-                                    </small>
-                                </p>
-                                <p className="card-text home__tutor__stars mb-0">
-                                    <small className="text-muted">
-                                        {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
-                                    </small>
-                                </p>
-                                <Link to={`/tutor/${tutor._id}`}>
-                                    <button type="button" className="btn btn-secondary my-2">
-                                        Profile
-                                    </button>
-                                </Link>
-                            </div>
-                            </div>
-                        </div>
+                <div class="home__tutor col-lg-4" key={tutor.id}>
+                    <div class="home__tutor__content">
+                        <img src={`./static/${tutor.img}`} alt={tutor.name} class="rounded-circle home__portrait"/> 
+                        <h5>{tutor.name}</h5>
+                        <p className="card-text home__tutor__stars mb-0">
+                            <small className="text-muted">
+                                    {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
+                            </small>
+                            </p>
+                        <p>{renderCourseNames(tutor.courses)}</p>
+                        <Link to={`/tutor/${tutor._id}`}>
+                            <p class="btn btn-secondary">View details &raquo;</p>
+                        </Link>
                     </div>
                 </div>
                 ); 
