@@ -50,11 +50,11 @@ const Home = (props) => {
     const renderData = (data) => 
         data.map(tutor => {
             return (
-                <div className="col-lg-4" key={tutor.id}>
+                <div className="col-lg-4" key={tutor._id}>
                     <div className="card">
                         <div className="row g-0">
                             <div className="col-md-4 home__image__container">
-                                    <img src={`./static/${tutor.img}`} className="home__tutor__image" alt={tutor.name}/>
+                                    <img src={`./static/${tutor.img}`} className="home__tutor__image img-thumbnail" alt={tutor.name}/>
                             </div>
                             <div className="col-md-8">
                             <div className="card-body">
@@ -70,7 +70,7 @@ const Home = (props) => {
                                         {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
                                     </small>
                                 </p>
-                                <Link to={`/tutor/${tutor.id}`}>
+                                <Link to={`/tutor/${tutor._id}`}>
                                     <button type="button" className="btn btn-secondary my-2">
                                         Profile
                                     </button>

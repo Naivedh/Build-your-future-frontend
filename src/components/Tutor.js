@@ -9,7 +9,7 @@ const Tutor = (props) => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const tutor = data.instructors.find(tutor => tutor.id === params.id);
+    const tutor = data.instructors.find(tutor => tutor._id === params.id);
 
     useEffect(() => {
         if(tutor === undefined){
