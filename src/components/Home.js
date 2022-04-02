@@ -53,9 +53,9 @@ const Home = (props) => {
     const renderData = (data) => 
         data.map(tutor => {
             return (
-                <div class="home__tutor col-lg-4" key={tutor.id}>
-                    <div class="home__tutor__content">
-                        <img src={`./static/${tutor.img}`} alt={tutor.name} class="rounded-circle home__portrait"/> 
+                <div className="home__tutor col-lg-4" key={tutor._id}>
+                    <div className="home__tutor__content">
+                        <img src={`./static/${tutor.img}`} alt={tutor.name} className="rounded-circle home__portrait"/> 
                         <h5>{tutor.name}</h5>
                         <p className="card-text home__tutor__stars mb-0">
                             <small className="text-muted">
@@ -64,7 +64,7 @@ const Home = (props) => {
                             </p>
                         <p>{renderCourseNames(tutor.courses)}</p>
                         <Link to={`/tutor/${tutor._id}`}>
-                            <p class="btn btn-secondary">View details &raquo;</p>
+                            <p className="btn btn-secondary">View details &raquo;</p>
                         </Link>
                     </div>
                 </div>
