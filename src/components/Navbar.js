@@ -13,8 +13,8 @@ const Navbar = (props) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <Link className="navbar-brand" to="/" >
-          <div className="row">
-            <img className="navbar__img" src="" alt="Logo"/>
+          <div className="row navbar__title">
+            <img className="navbar__img" src="/logo.1.svg" alt="Logo" />
             <p className="navbar__p">Build Your Future</p>
           </div>
           </Link>

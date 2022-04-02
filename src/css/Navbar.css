@@ -5,17 +5,27 @@
 .navbar row{
     text-align: center;
 }
+
+.navbar__title {
+    display: block !important;
+}
+
 .navbar > a i:hover {
     color: black!important;
 }
 .navbar__img {
     margin-left: .7rem;
+    max-width: 85px;
+    max-height: 85px;
 }
 .navbar__p {
     margin-bottom: 0!important;
-    font-size: medium; 
+    font-weight: medium; 
     text-align: left;
+    font-size: 1.5rem;
+    display: inline-block;
 }
+
 .search__form{
     display: inline-flex;
 }
