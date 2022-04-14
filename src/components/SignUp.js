@@ -1,8 +1,31 @@
 import React, { useEffect } from "react";
 
 import "../css/SignUp.css";
+import { httpPost } from "../utils/api";
 
 const SignUp = () => {
+
+  const submitSignUpData = async () => {
+    try {
+      const signUpData = {
+        email: "naivedh.a@utdallas.edu",
+        password: "password",
+        name: "Naivedh",
+        about: "About to be added",
+        desc: "Description added",
+        imageUrl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+        workingHourStart: 12903809123,
+        workingHourEnd: 2131231232,
+        rating: 4.7,
+        hoursTutored: 0, 
+      };
+      const data = await httpPost('/tutorapi/postTutorSignIn', signUpData);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   function handleChange(event) {
     if (event.target.value === "tutor") {
       document.getElementById("studentdiv").style.display = "none";
@@ -128,6 +151,7 @@ const SignUp = () => {
                         className="btn btn--form"
                         type="submit"
                         value="Sign Up"
+                        onClick={submitSignUpData}
                       />
                     </li>
                     <li className="new__link">
