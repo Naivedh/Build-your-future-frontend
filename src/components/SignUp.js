@@ -3,15 +3,15 @@ import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
 const SignUp = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [name, useName] = useState();
-  const [about, setAbout] = useState();
-  const [desc, setDesc] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
+  const [desc, setDesc] = useState("");
   const [imageUrl, setImageUrl] = useState();
-  const [workingHourStart, setWorkingHourStart] = useState();
-  const [workingHourEnd, setWorkingHourEnd] = useState();
- 
+  const [workingHourStart, setWorkingHourStart] = useState("");
+  const [workingHourEnd, setWorkingHourEnd] = useState("");
+  const [isTutor, setIsTutor] = useState(false);
 
   const submitSignUpData = async () => {
     try {
@@ -21,29 +21,20 @@ const SignUp = () => {
         name: "Naivedh",
         about: "About to be added",
         // desc: "Description added",
-        imageUrl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+        //imageurl issue user uploads file we need url
+        imageUrl:
+          "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         workingHourStart: 12903809123,
         workingHourEnd: 2131231232,
         // rating: 4.7,
-        // hoursTutored: 0, 
+        // hoursTutored: 0,
       };
-      const data = await httpPost('/tutorapi/postTutorSignIn', signUpData);
+      const data = await httpPost("/tutorapi/postTutorSignIn", signUpData);
       console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
-
-  function handleChange(event) {
-    if (event.target.value === "tutor") {
-      document.getElementById("studentdiv").style.display = "none";
-      document.getElementById("tutordiv").style.display = "block";
-    } else if (event.target.value === "student") {
-      document.getElementById("studentdiv").style.display = "block";
-      document.getElementById("tutordiv").style.display = "none";
-    }
-  }
-
   return (
     <div className="container">
       <div className="row">
@@ -61,7 +52,9 @@ const SignUp = () => {
                     name="email"
                     id="email"
                     placeholder="james.bond@spectre.com"
+                    value={email}
                     required
+                    onChange={(e)=>setEmail(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -74,6 +67,8 @@ const SignUp = () => {
                     placeholder="********"
                     required
                     autoComplete="on"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -84,74 +79,88 @@ const SignUp = () => {
                     name="name"
                     id="name"
                     placeholder="enter name"
+                    value={name}
                     required
+                    onChange={(e)=>setName(e.target.value)}
                   />
-                </div><br/>
-                <select className="form-group" onChange={handleChange} required>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="about">About</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="about"
+                    id="about"
+                    placeholder="Please enter about you"
+                    value={about}
+                    onChange={(e)=>setAbout(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="descripton">Descripton</label>
+                  <textarea
+                    className="form-control"
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Please enter your description"
+                    value={desc}
+                    onChange={(e)=>setDesc(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="photo">Picture</label>
+                  <input
+                    className="form-control"
+                    type="file"
+                    id="userphoto"
+                    name="userphoto"
+                    value={imageUrl}
+                    // what to do?
+                  />
+                </div>
+
+                <br />
+                <select
+                  className="form-group"
+                  onChange={(e) => setIsTutor(e.target.value === "tutor")}
+                  required
+                >
                   <option>Select</option>
                   <option value="tutor">Tutor</option>
                   <option value="student">Student</option>
                 </select>
-                <div
-                  className="form-group"
-                  id="tutordiv"
-                  style={{ display: "none" }}
-                >
+
+                {/* tutor */}
+                {isTutor ? (
                   <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input
-                     className="form-control"
-                      type="text"
-                      name="description"
-                      id="description"
-                      placeholder="Please enter your description"
-                    />
+                    <div className="form-group">
+                      <label htmlFor="starthr">Starting Time</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="Starting hr"
+                        id="strathr"
+                        placeholder="Please enter Starting hr"
+                        value={workingHourStart}
+                        onChange={(e)=>setWorkingHourStart(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="endhr">Ending Time</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="Ending hr"
+                        id="endhr"
+                        placeholder="Please enter Ending hr"
+                        value={workingHourEnd}
+                        onChange={(e)=>setWorkingHourEnd(e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="Photo">Picture</label>
-                    <input  className="form-control" type="file" id="userphoto" name="userphoto" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="starthr">Starting Time</label>
-                    <input
-                     className="form-control"
-                      type="text"
-                      name="Starting hr"
-                      id="strathr"
-                      placeholder="Please enter Starting hr"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="endhr">Ending Time</label>
-                    <input
-                     className="form-control"
-                      type="text"
-                      name="Ending hr"
-                      id="endhr"
-                      placeholder="Please enter Ending hr"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="form-group"
-                  id="studentdiv"
-                  style={{ display: "none" }}
-                >
-                  <div className="form-group">
-                    <label htmlFor="descripton">Descripton</label>
-                    <input
-                     className="form-control"
-                      type="text"
-                      name="description"
-                      id="description"
-                      placeholder="Please enter your description"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="photo">Picture</label>
-                    <input  className="form-control" type="file" id="userphoto" name="userphoto" />
-                  </div>
-                </div>
+                ) : null}
+
                 <div className="m-t-lg">
                   <ul className="list-inline">
                     <li>
