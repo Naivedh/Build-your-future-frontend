@@ -13,20 +13,22 @@
             "courses": [
                 {
                     "_id": "asdkl;askdlak;sd",
-                    "title": "Web Programming",
+                    "name": "Web Programming",
                     "description": "Awesome course :)",
                     "rating": 4.6,
+                    "img":"_1.webp",
                     "feedback_id": "feedback1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Database Design",
+                    "name": "Database Design",
                     "description": "Pretty cool course:)",
                     "rating": 4.8, 
+                    "img":"_1.webp",
                     "feedback_id": "feedback2"
                 }
             ],
-            "stars": 4.7, 
+            "rating": 4.7, 
             "hoursTutored": 0
         },
         {   "_id":"2",
@@ -42,20 +44,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "AI",
+                    "name": "AI",
                     "description": "Awesome course :)",
                     "rating": 4.2,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Database Design",
+                    "name": "Database Design",
                     "description": "Pretty cool course:)",
                     "rating": 4.8,
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.4, 
+            "rating": 4.4, 
             "hoursTutored": 0
         },
         {   "_id":"3",
@@ -71,20 +73,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Networks",
+                    "name": "Networks",
                     "description": "Awesome course :)",
                     "rating": 4.4,
                     "feedback_id": "feedback3_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Data structure",
+                    "name": "Data structure",
                     "description": "Pretty cool course:)",
                     "rating": 4.9, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.7, 
+            "rating": 4.7, 
             "hoursTutored": 0
         },
         {   "_id":"4",
@@ -99,20 +101,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Mathematical",
+                    "name": "Mathematical",
                     "description": "Awesome course :)",
                     "rating": 4.3,
                     "feedback_id": "feedback2_1" 
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Combinatorial optimization",
+                    "name": "Combinatorial optimization",
                     "description": "Pretty cool course:)",
                     "rating": 4.5, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.3, 
+            "rating": 4.3, 
             "hoursTutored": 0
         },
         {   "_id":"5",
@@ -127,20 +129,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Mobile",
+                    "name": "Mobile",
                     "description": "Awesome course :)",
                     "rating": 4.2,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "distributed computing",
+                    "name": "distributed computing",
                     "description": "Pretty cool course:)",
                     "rating": 4.8, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.4, 
+            "rating": 4.4, 
             "hoursTutored": 0
         },
         {   "_id":"6",
@@ -155,20 +157,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Machine learning",
+                    "name": "Machine learning",
                     "description": "Awesome course :)",
                     "rating": 4.9,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Big data",
+                    "name": "Big data",
                     "description": "Pretty cool course:)",
                     "rating": 4.8,
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.8, 
+            "rating": 4.8, 
             "hoursTutored": 0
         },
         {   "_id":"7",
@@ -183,20 +185,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Video Analytics",
+                    "name": "Video Analytics",
                     "description": "Awesome course :)",
                     "rating": 4.2,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Artificial Intelligence",
+                    "name": "Artificial Intelligence",
                     "description": "Pretty cool course:)",
                     "rating": 4.8,
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.4, 
+            "rating": 4.4, 
             "hoursTutored": 0
         },
         {   "_id":"8",
@@ -211,20 +213,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Algorithms",
+                    "name": "Algorithms",
                     "description": "Awesome course :)",
                     "rating": 4.3,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Computational Geometry",
+                    "name": "Computational Geometry",
                     "description": "Pretty cool course:)",
                     "rating": 4.7, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.5, 
+            "rating": 4.5, 
             "hoursTutored": 0
         },
         {   "_id":"9",
@@ -239,20 +241,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Financial Data Mining",
+                    "name": "Financial Data Mining",
                     "description": "Awesome course :)",
                     "rating": 4.2,
                     "feedback_id": "feedback2_1" 
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Bioinformatics",
+                    "name": "Bioinformatics",
                     "description": "Pretty cool course:)",
                     "rating": 4.8, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.4, 
+            "rating": 4.4, 
             "hoursTutored": 0
         },
         {   "_id":"10",
@@ -267,20 +269,20 @@
             "courses": [
                 {
                     "_id": "qweqweqwe",
-                    "title": "Online education",
+                    "name": "Online education",
                     "description": "Awesome course :)",
                     "rating": 4.5,
                     "feedback_id": "feedback2_1"  
                 },
                 {
                     "_id": "asdka;sdkla;skkla",
-                    "title": "Intelligent Design",
+                    "name": "Intelligent Design",
                     "description": "Pretty cool course:)",
                     "rating": 4.8, 
                     "feedback_id": "feedback2_2"
                 }
             ],
-            "stars": 4.6, 
+            "rating": 4.6, 
             "hoursTutored": 0
         }
 	]

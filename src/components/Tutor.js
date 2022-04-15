@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTutor } from '../TutorContextProvider';
 
 import "../css/Tutor.css"
+import Card from './Card';
 
 const Tutor = () => {
     const data = useTutor();
@@ -39,6 +40,12 @@ const Tutor = () => {
                     <p className="tutor__tutor__about">{tutor.about}</p>
                     <p className="tutor__tutor__desc">{tutor.desc}</p>
                 </div>
+            </div>
+            <div className="row course__heading">
+                <p>Courses</p>
+            </div>
+            <div className="row home__row">
+                {Card(tutor.courses, false)}
             </div>
         </div>
     );
