@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Navbar.css'
 import { useFilterSearch, useSearch } from '../SearchContextProvider';
 const Navbar = (props) => {
     const [ search, setSearch ] = useSearch();
     const [ filterText, setFiltertext ] = useFilterSearch();
+    const [ isSignedIn, setIsSignedIn ] = useState();
 
     const applySearch = ({ target: { value }}) => {
       setFiltertext(value);
@@ -34,17 +35,28 @@ const Navbar = (props) => {
          
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle"  href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Link className="nav-link dropdown-toggle"  to="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="bi bi-gear-wide-connected"></i>
-                </a>
+                </Link>
                 <div className="dropdown-menu" style={{right: "0", left: "auto", marginTop:".7rem"}} aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="/#"><i className="bi bi-person"></i> Profile</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="/#"><i className="bi bi-star-fill"></i>  Favourites</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="/#"><i className="bi bi-calendar-check"></i> Appointments</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="/#"><i className="bi bi-box-arrow-left"></i> Logout</a>
+                  {
+                    isSignedIn
+                    ?(<>
+                        <Link className="dropdown-item" to="/#"><i className="bi bi-person"></i> Profile</Link>
+                        <div className="dropdown-divider"></div>
+                        <Link className="dropdown-item" to="/#"><i className="bi bi-star-fill"></i>  Favourites</Link>
+                        <div className="dropdown-divider"></div>
+                        <Link className="dropdown-item" to="/#"><i className="bi bi-calendar-check"></i> Appointments</Link>
+                        <div className="dropdown-divider"></div>
+                        <Link className="dropdown-item" to="/#"><i className="bi bi-box-arrow-left"></i> Logout</Link>
+                      </>)
+                    :(<>
+                        <Link className="dropdown-item" to="/login"><i className="bi bi-person"></i>SignIn</Link>
+                        <div className="dropdown-divider"></div>
+                        <Link className="dropdown-item" to="/signup"><i className="bi bi-star-fill"></i>SignUp</Link>
+                      </>)
+                  }
+                  
                 </div>
               </li>
           </ul>
