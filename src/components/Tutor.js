@@ -31,7 +31,7 @@ const Tutor = () => {
                         <img src={`../../static/${tutor.img}`} className="tutor__tutor__image" alt={tutor.name}/>
                         <p className="tutor__tutor__email">{tutor.email}</p>
                         <p className="tutor__tutor__stars">
-                            {Array.from({ length: tutor.stars }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
+                            {Array.from({ length: tutor.rating }, (_, i) =><i key={i} className="bi bi-star-fill"></i>)}
                         </p>
                     </div>
                 </div>

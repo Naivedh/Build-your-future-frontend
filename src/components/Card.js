@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import '../css/Home.css';
+
+//second undefined
 const renderCourseNames = (courses) => {
     let courseName = courses[0].name;
     //more than 2 do something.
     for(let i = 1; i<courses.length; i++){
-        courseName+=`, ${courses[i].title}`;
+        courseName+=`, ${courses[i].name}`;
     }
     return courseName;
 }

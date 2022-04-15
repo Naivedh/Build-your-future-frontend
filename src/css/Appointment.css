@@ -1,0 +1,53 @@
+.appointment__main__row{
+    font-size: 28px;
+    font-weight: 600;
+}
+.appointment__row{
+    background-color: rgb(255, 255, 255);
+    padding: 1rem;
+    margin: 1rem;
+    font-size: 17px;
+    font-weight: 500;
+}
+.appointment__list-group{
+    text-align: center;
+}
+.appointment__list-group p{
+    margin: .2rem !important;
+}
+.appointment__image{
+    display: inline-flex;
+    
+}
+.appointment__image img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: -.3rem  .7rem 0 0;
+}
+.appointment__col__active{
+    padding: 0rem 3rem;
+    color: white;
+}
+.appointment__active{
+    background-color: rgb(61, 180, 83);
+    padding: .3rem;
+    border-radius: 2%;
+}
+/* temprory */
+.appointment__cancel{
+    background-color: rgb(209, 68, 68);
+    padding: .3rem;
+    border-radius: 2%;
+}
+
+.appointment__inactive{
+    background-color: rgb(66, 112, 205);;
+    padding: .3rem;
+    border-radius: 2%;
+}
+@media only screen and (max-width: 980px) {
+    .appointment__main__row{
+        display: none;
+    }
+}

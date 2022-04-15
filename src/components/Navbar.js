@@ -5,7 +5,7 @@ import { useFilterSearch, useSearch } from '../SearchContextProvider';
 const Navbar = (props) => {
     const [ search, setSearch ] = useSearch();
     const [ filterText, setFiltertext ] = useFilterSearch();
-    const [ isSignedIn, setIsSignedIn ] = useState(true);
+    const [ isSignedIn, setIsSignedIn ] = useState(false);
 
     const applySearch = ({ target: { value }}) => {
       setFiltertext(value);
@@ -46,14 +46,14 @@ const Navbar = (props) => {
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/#"><i className="bi bi-star-fill"></i> Favourites</Link>
                         <div className="dropdown-divider"></div>
-                        <Link className="dropdown-item" to="/#"><i className="bi bi-calendar-check"></i> Appointments</Link>
+                        <Link className="dropdown-item" to="/appointments"><i className="bi bi-calendar-check"></i> Appointments</Link>
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/#"><i className="bi bi-box-arrow-left"></i> Logout</Link>
                       </>)
                     :(<>
-                        <Link className="dropdown-item" to="/login"><i class="bi bi-box-arrow-in-right"></i> SignIn</Link>
+                        <Link className="dropdown-item" to="/login"><i className="bi bi-box-arrow-in-right"></i> SignIn</Link>
                         <div className="dropdown-divider"></div>
-                        <Link className="dropdown-item" to="/signup"><i class="bi bi-person-lines-fill"></i> SignUp</Link>
+                        <Link className="dropdown-item" to="/signup"><i className="bi bi-person-lines-fill"></i> SignUp</Link>
                       </>)
                   }
                   
