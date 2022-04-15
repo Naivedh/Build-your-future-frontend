@@ -2,6 +2,25 @@ import React, { useState } from "react";
 import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
+
+
+// let formdata = new FormData();
+//       formdata.append("name", this.name);
+//       formdata.append("speciality", this.forte);
+//       formdata.append("location", this.location);
+//       formdata.append("image", this.image);
+//       formdata.append("cuisines", this.foodServed);
+//       formdata.append("tables", this.tables);
+//       formdata.append("openhrs", openHours);
+//       const upload = await fetch("/master/collect", {
+//         method: "POST",
+//         headers: {
+//           Accept: "application/json",
+//         },
+//         credentials: "same-origin",
+//         body: formdata,
+//       });
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,8 +45,6 @@ const SignUp = () => {
           "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         workingHourStart: 12903809123,
         workingHourEnd: 2131231232,
-        // rating: 4.7,
-        // hoursTutored: 0,
       };
       const data = await httpPost("/tutorapi/postTutorSignIn", signUpData);
       console.log(data);
