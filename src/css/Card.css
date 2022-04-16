@@ -1,0 +1,37 @@
+.card__content{
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 3%;
+    transition: .5s;
+}
+.card__content h5{
+    margin: 1rem;
+    font-size: 25px;
+}
+.col-lg-4 .card__content__hover:hover {
+    box-shadow: 0px 1px 7px 4px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 1px 7px 4px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 1px 7px 4px rgba(0,0,0,0.1);
+    background-color: #2b2a33;
+    color:white;
+}
+.col-lg-4 .card__content__nohover {
+    background-color: #2b2a33;
+    color:white;
+}
+.card__btn__secondary, .card__button{
+    border: none;
+}
+
+.card__button, .card__button:hover {
+    background-color: white;
+    color: black;
+}
+.card__content__hover:hover .card__btn__secondary{
+    background-color: white;
+    color: black;
+}
+.card__content__hover .card__btn__secondary:hover{
+    background-color: white;
+    color: black;
+}

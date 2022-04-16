@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import '../css/Home.css';
+import '../css/Card.css';
 
 //second undefined
 const renderCourseNames = (courses) => {
@@ -13,9 +14,10 @@ const renderCourseNames = (courses) => {
 }
 
 const Card = (data, isTutorData) => data.map(dataPoint => {
+    console.log(isTutorData)
     return (
-        <div className="home__tutor col-lg-4" key={dataPoint._id}>
-            <div className="home__tutor__content">
+        <div className="col-lg-4" key={dataPoint._id}>
+            <div className={`card__content ${isTutorData?  "card__content__hover" :  "card__content__nohover"}`}>
                 <img src={`../../static/${dataPoint.img}`} alt={dataPoint.name} className="rounded-circle home__portrait"/> 
                 <h5>{dataPoint.name}</h5>
                 <p className="card-text home__tutor__stars mb-0">
@@ -27,14 +29,14 @@ const Card = (data, isTutorData) => data.map(dataPoint => {
                         <>
                             <p>{renderCourseNames(dataPoint.courses)}</p>
                             <Link to={`/tutor/${dataPoint._id}`}>
-                                <p className="btn btn-secondary">View details &raquo;</p>
+                                <p className={`btn btn-secondary ${isTutorData?  "card__btn__secondary" :  "" }`}>View details &raquo;</p>
                             </Link>
                         </>
                     :<>
                         {/* do not remove p tag => for spacing */}
                         <p></p> 
                         <Link to={`/course/${dataPoint._id}`}>
-                            <p className="btn btn-secondary">View details &raquo;</p>
+                            <p className={`btn btn-secondary ${isTutorData?  "" :  "card__button" }`}>View details &raquo;</p>
                         </Link>
                     </>
                     }

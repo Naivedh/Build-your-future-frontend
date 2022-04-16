@@ -55,6 +55,17 @@
     text-transform: uppercase;
 }
 
+/* tutor add course  */
+.tutor__course__add{
+    padding: 11rem 0;
+    margin: 2rem;
+    border-radius: 3%;
+    background-color: rgba(0, 0, 0, 0.284);
+    color: rgb(221, 221, 221);
+    font-size: 50px;
+    font-weight: 700;
+}
+
 @media only screen and (max-width: 450px) {
     .tutor__tutor__image{
         width: 16rem;
