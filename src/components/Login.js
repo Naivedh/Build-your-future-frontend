@@ -18,7 +18,7 @@ const Login = () => {
         password: "password",
        
       };
-      const data = await httpPost("/tutorapi/postTutorSignIn", loginData);
+      const data = await  httpPost("/tutorapi/postTutorSignIn", loginData);
       console.log(data);
     } catch (err) {
       console.log(err);
@@ -32,7 +32,7 @@ const Login = () => {
             <div className="container__child login__form">
               <h2>Login</h2>
 
-              <form className="login__login__form__container" id="f1">
+              <form className="login__login__form__container" method="post" id="f1">
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTutor } from "../TutorContextProvider";
 
-import "../css/Tutor.css";
+import "../css/Tutor_Course.css";
 import Card from "./Card";
 
 const Tutor = () => {
@@ -56,12 +56,51 @@ const Tutor = () => {
         {false ? null : (
           <div className="home__tutor col-lg-4">
             <div className="tutor__course__add">
-                <div>
-                <i className="bi bi-plus"></i>
-                </div>
+              <div>
+                <i className="bi bi-plus" data-toggle="modal" data-target="#exampleModal"></i>
+              </div>
             </div>
           </div>
         )}
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
