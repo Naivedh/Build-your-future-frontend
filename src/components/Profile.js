@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
+import Card from "./Card";
+import { useTutor } from "../TutorContextProvider";
 
 
 const Profile = () => {
+    const data = useTutor();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -13,7 +16,8 @@ const Profile = () => {
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
   const [isTutor, ] = useState(false);
-
+  const tutor = data.instructors.find((tutor) => tutor._id === "1");
+  console.log(tutor)
   const submitSignUpData = async (e) => {
     try {
       e.preventDefault();
@@ -141,7 +145,7 @@ const Profile = () => {
            
 
                 {/* tutor */}
-                {isTutor ? (
+                {!isTutor ? (
                   <div className="form-group">
                     <div className="form-group">
                       <label htmlFor="starthr">Starting Time</label>
@@ -187,9 +191,16 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="col-lg-6"></div>
       </div>
+      <div>
+      {!isTutor?(
+      <div className="row home__row">
+        {/* false :is tutor false:cannot edit */}
+        {Card(tutor.courses, false, true)}
+        </div>):null};
+        </div>
     </div>
+
   );
 };
 
