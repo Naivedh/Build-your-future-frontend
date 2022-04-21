@@ -12,7 +12,7 @@ const Tutor = () => {
 
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, ] = useState();
   
 
 
