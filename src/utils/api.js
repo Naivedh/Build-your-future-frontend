@@ -1,4 +1,8 @@
 import axios from 'axios';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d75edf5835e3e1cd0563136c4f99db6b002146f
 
 const defaultUrl = "http://localhost:8000"
 
