@@ -57,8 +57,8 @@ const Tutor = () => {
         <p>Courses</p>
       </div>
       <div className="row home__row">
-        {/* false :is tutor */}
-        {Card(tutor.courses, false)}
+        {/* false :is tutor false:cannot edit */}
+        {Card(tutor.courses, false, false)}
         {false ? null : (
           <div className="home__tutor col-lg-4">
             <div className="tutor__course__add">

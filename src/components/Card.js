@@ -13,8 +13,7 @@ const renderCourseNames = (courses) => {
     return courseName;
 }
 
-const Card = (data, isTutorData) => data.map(dataPoint => {
-    console.log(isTutorData)
+const Card = (data, isTutorData, isEditable) => data.map(dataPoint => {
     return (
         <div className="col-lg-4" key={dataPoint._id}>
             <div className={`card__content ${isTutorData?  "card__content__hover" :  "card__content__nohover"}`}>

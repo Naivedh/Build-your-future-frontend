@@ -45,8 +45,9 @@ const Home = (props) => {
     return (
         <div className="home">
                 <div className="row home__row">
-                    {
-                        Card(data, true)
+                    {   
+                    // true: isTutor false:cannot edit
+                        Card(data, true, false)
                     }
             </div>
         </div>

@@ -3,24 +3,6 @@ import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
 
-
-// let formdata = new FormData();
-//       formdata.append("name", this.name);
-//       formdata.append("speciality", this.forte);
-//       formdata.append("location", this.location);
-//       formdata.append("image", this.image);
-//       formdata.append("cuisines", this.foodServed);
-//       formdata.append("tables", this.tables);
-//       formdata.append("openhrs", openHours);
-//       const upload = await fetch("/master/collect", {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//         },
-//         credentials: "same-origin",
-//         body: formdata,
-//       });
-
 const Profile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +12,7 @@ const Profile = () => {
   const [image, setImage] = useState();
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
-  const [isTutor, setIsTutor] = useState(false);
+  const [isTutor, ] = useState(false);
 
   const submitSignUpData = async (e) => {
     try {
