@@ -3,23 +3,20 @@ import "../css/SignIn.css";
 import { httpPost } from "../utils/api";
 
 
-
-
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
 
-  const submitLoginData = async () => {
+  const submitLoginData = async (e) => {
+    e.preventDefault();
     try {
       const loginData = {
         email: "naivedh.a@utdallas.edu",
         password: "password",
-       
       };
-      const data = await httpPost("/tutorapi/postTutorSignIn", loginData);
-      console.log(data);
+      // const url = isTutor ? LOGIN_API_TUTOR : LOGIN_API_STUDENT;
+      // const data = await httpPost(url, loginData);
+      // console.log(data);
     } catch (err) {
       console.log(err);
     }

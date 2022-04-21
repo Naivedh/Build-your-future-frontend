@@ -3,23 +3,15 @@ import {Cloudinary} from "@cloudinary/url-gen";
 
 const defaultUrl = "http://localhost:8000"
 
-const cloudinaryId = new Cloudinary({
-    cloud: {
-        cloudName: 'dt9mpca3c',
-    }
-});
 
-const httpPost = async (url, data) => {
+const httpPost = async (url, data, headers) => {
     try {
-        const response = await axios.post(`${defaultUrl}${url}`, data);
+        console.log({ url, data, headers });
+        const response = await axios.post(`${defaultUrl}${url}`, data, headers);
         return response.data;
     } catch(err) {
         throw err;
     }
-}
-
-const uploadImageAndGenerateUrl = () => {
-
 }
 
 export { httpPost };

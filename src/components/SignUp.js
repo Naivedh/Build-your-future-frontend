@@ -27,31 +27,49 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [desc, setDesc] = useState("");
-  const [imageUrl, setImageUrl] = useState();
+  const [image, setImage] = useState();
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
   const [isTutor, setIsTutor] = useState(false);
 
-  const submitSignUpData = async () => {
+  const submitSignUpData = async (e) => {
     try {
-      const signUpData = {
-        email: "naivedh.a@utdallas.edu",
-        password: "password",
-        name: "Naivedh",
-        about: "About to be added",
-        // desc: "Description added",
-        //imageurl issue user uploads file we need url
-        imageUrl:
-          "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-        workingHourStart: 12903809123,
-        workingHourEnd: 2131231232,
+      e.preventDefault();
+      const commonKeys = {
+        "email": email, 
+        "password": password,
+        "name": name, 
+        "desc": desc
       };
-      const data = await httpPost("/tutorapi/postTutorSignIn", signUpData);
+
+      const formData = new window.FormData();
+
+      Object.keys(commonKeys).forEach(k => {
+        formData.append(`${k}`, commonKeys[k]);
+      });
+
+      let startDate = new Date();
+      let endDate = new Date();
+
+      const [startHour, startMinute] = workingHourStart.split(":");
+      const [endHour, endMinute] = workingHourEnd.split(":");
+
+      startDate.setHours(Number(startHour), Number(startMinute), 0);
+      endDate.setHours(Number(endHour), Number(endMinute), 0);
+
+      if (isTutor) {
+        formData.append('workingHourStart', startDate.getTime());
+        formData.append('workingHourEnd', endDate.getTime());
+        formData.append('image', image);
+      }
+      
+      const data = await httpPost("/tutorapi/postTutorSignUp", formData);
       console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div className="container">
       <div className="row">
@@ -132,8 +150,8 @@ const SignUp = () => {
                     type="file"
                     id="userphoto"
                     name="userphoto"
-                    value={imageUrl}
-                    // what to do?
+                    onChange={(e) => setImage(e.target.files[0])}
+                    // value={image?.fileName}
                   />
                 </div>
 
@@ -155,7 +173,7 @@ const SignUp = () => {
                       <label htmlFor="starthr">Starting Time</label>
                       <input
                         className="form-control"
-                        type="text"
+                        type="time"
                         name="Starting hr"
                         id="strathr"
                         placeholder="Please enter Starting hr"
@@ -167,7 +185,7 @@ const SignUp = () => {
                       <label htmlFor="endhr">Ending Time</label>
                       <input
                         className="form-control"
-                        type="text"
+                        type="time"
                         name="Ending hr"
                         id="endhr"
                         placeholder="Please enter Ending hr"

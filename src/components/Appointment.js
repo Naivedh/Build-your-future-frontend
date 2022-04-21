@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/Appointment.css'
 const Appointment = (props) => {
     return (
-        <div className="container row m-5">
+        <div className="row m-3 p-5">
             <div className="col-lg-12">
                 <div className="appointment__list-group list-group">
 
