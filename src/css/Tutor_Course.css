@@ -66,6 +66,30 @@
     font-weight: 700;
 }
 
+.course__comment__card{
+    padding: 3rem 5rem;
+}
+.course__comment__card .card{
+    margin: 1rem 0;
+}
+.course__comment__image img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 1rem;
+}
+.course__comment__image{
+    display: inline-flex;
+}
+.course__comment__text{
+    margin: 0 1rem;
+}
+.course__comment__text__name{
+    font-weight: 600;
+    font-size: 18px;
+    color: #2f4274;
+}
+
 @media only screen and (max-width: 450px) {
     .tutor__tutor__image{
         width: 16rem;
@@ -76,5 +100,8 @@
     }
     footer .row{
         --bs-gutter-x: 0;
+    }
+    .course__comment__card{
+        padding: 1rem;
     }
   }

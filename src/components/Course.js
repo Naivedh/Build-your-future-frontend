@@ -8,11 +8,11 @@ const Course = (props) => {
   const navigate = useNavigate();
 
   let course;
-  for(let i =0; i<data.instructors.length; i++ ){
-    for(let j =0; j<data.instructors[i].courses.length; j++){
-        if(data.instructors[i].courses[j]._id === params.id){
-            course = data.instructors[i].courses[j]
-        }
+  for (let i = 0; i < data.instructors.length; i++) {
+    for (let j = 0; j < data.instructors[i].courses.length; j++) {
+      if (data.instructors[i].courses[j]._id === params.id) {
+        course = data.instructors[i].courses[j];
+      }
     }
   }
 
@@ -26,6 +26,34 @@ const Course = (props) => {
   if (course === undefined) {
     return "";
   }
+
+  const commentCard = () => {
+    return (
+      <div class="card">
+        <div class="card-body row">
+          <div className="col-lg-12 course__comment__image">
+            <img src="../../static/_1.webp" alt="img" />
+            <div className="course__comment__text">
+              <>
+                <div className="row">
+                  <div className="col-lg-10">
+                    <p className="course__comment__text__name">Name</p>
+                  </div>
+                  <div className="col-lg-2">.... 2 days ago</div>
+                </div>
+              </>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="container">
@@ -77,8 +105,12 @@ const Course = (props) => {
                 <p className="tutor__tutor__desc">{tutor.desc}</p> */}
         </div>
       </div>
-      <div className="row course__heading">
-        <p>Comments</p>
+      <div className="row">
+        <p className="course__heading">Comments</p>
+        <div className="course__comment__card">
+          {commentCard()}
+          {commentCard()}
+        </div>
       </div>
     </div>
   );
