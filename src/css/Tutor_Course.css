@@ -66,6 +66,10 @@
     font-weight: 700;
 }
 
+.course__button .btn-warning:focus{
+border: 0 !important;
+}
+
 .course__comment__card{
     padding: 3rem 5rem;
 }
