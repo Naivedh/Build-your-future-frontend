@@ -7,7 +7,8 @@ const Course = (props) => {
   const params = useParams();
   const navigate = useNavigate();
   const [isEnroll, setIsEnroll] = useState(false);
-
+  const [workingHourStart, setWorkingHourStart] = useState("");
+  const [workingHourEnd, setWorkingHourEnd] = useState("");
   let course;
   for (let i = 0; i < data.instructors.length; i++) {
     for (let j = 0; j < data.instructors[i].courses.length; j++) {
@@ -98,14 +99,16 @@ function changeEnroll(){
               >
                 Favorite
               </button>
-
+                
               <button
                 type="button"
                 class="btn btn-secondary m-4"
                 data-dismiss="modal"
+                data-toggle="modal" data-target="#exampleModal"
               >
                 appointment
-              </button></div> ) : null}
+              </button>
+              </div> ) : null}
               </div>
 
           {/* <p className="tutor__tutor__about">{tutor.about}</p>
@@ -119,6 +122,54 @@ function changeEnroll(){
           {commentCard()}
         </div>
       </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Appointment</h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+        </button>
+      </div>
+      <div class="modal-body">
+      <div className="form-group">
+                      <label htmlFor="starthr">Starting Time</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        min="0" max="23"
+                        name="Starting hr"
+                        id="strathr"
+                        placeholder="Please enter Starting hr"
+                        value={workingHourStart}
+                        onChange={(e)=>setWorkingHourStart(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="endhr">Ending Time</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        min="1" max="24"
+                        name="Ending hr"
+                        id="endhr"
+                        placeholder="Please enter Ending hr"
+                        value={workingHourEnd}
+                        onChange={(e)=>setWorkingHourEnd(e.target.value)}
+                      />
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   );
 };
