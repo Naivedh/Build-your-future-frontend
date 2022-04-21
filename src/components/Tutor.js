@@ -13,8 +13,6 @@ const Tutor = () => {
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
   const [imageUrl, ] = useState();
-  
-
 
   const tutor = data.instructors.find((tutor) => tutor._id === params.id);
 

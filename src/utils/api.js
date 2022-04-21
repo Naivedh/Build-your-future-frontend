@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {Cloudinary} from "@cloudinary/url-gen";
 
 const defaultUrl = "http://localhost:8000"
 
