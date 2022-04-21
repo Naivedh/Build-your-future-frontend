@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/SignIn.css";
 import { httpPost } from "../utils/api";
 
+const LOGIN_API = "/authapi/login";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,14 +10,14 @@ const Login = () => {
 
   const submitLoginData = async (e) => {
     e.preventDefault();
+    // console.log("In here");
     try {
       const loginData = {
-        email: "naivedh.a@utdallas.edu",
-        password: "password",
+        email,
+        password,
       };
-      // const url = isTutor ? LOGIN_API_TUTOR : LOGIN_API_STUDENT;
-      // const data = await httpPost(url, loginData);
-      // console.log(data);
+      const data = await httpPost(LOGIN_API, loginData);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
