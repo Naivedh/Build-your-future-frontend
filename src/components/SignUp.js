@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
@@ -7,6 +8,8 @@ const TUTOR_SIGNUP_API = "/tutorapi/tutorSignUp";
 const STUDENT_SIGNUP_API = "/studenapi/studentSignUp";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -19,6 +22,7 @@ const SignUp = () => {
   const [error, setError] = useState();
 
   const submitSignUpData = async (e) => {
+    
     try {
       e.preventDefault();
       if (error) {
@@ -31,10 +35,10 @@ const SignUp = () => {
         "desc": desc
       };
 
-      if (!password.match('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')) {
-        setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
-        return;
-      }
+      // if (!password.match('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')) {
+      //   setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
+      //   return;
+      // }
 
       const formData = new window.FormData();
 
@@ -50,15 +54,14 @@ const SignUp = () => {
 
       startDate.setHours(Number(startHour), Number(startMinute), 0);
       endDate.setHours(Number(endHour), Number(endMinute), 0);
-
       if (isTutor) {
         formData.append('workingHourStart', startDate.getTime());
         formData.append('workingHourEnd', endDate.getTime());
         formData.append('image', image);
       }
-      
       const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
-      // console.log(data);
+      console.log(data);
+      navigate("/signin");
     } catch (err) {
       console.log(err);
       setError(err);

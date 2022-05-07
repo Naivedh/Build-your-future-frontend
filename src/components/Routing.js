@@ -24,7 +24,6 @@ const Routing = (props) => {
                 <Route path="/error" element={<Error/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="*" element={<Error/>}/>
-               
             </Routes>
         </div>
     );
