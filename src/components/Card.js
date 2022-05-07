@@ -13,19 +13,15 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = (data, isTutorData, isEditable) =>{
+const Card = (data, isTutorData, isEditable) => {
+  const [courseData, setCourseData] = useState(null);
 
-   
-    const [courseData, setCourseData] = useState(null);
+  const courseEditHandler = (course) => () => {
+    setCourseData(course);
+  };
 
-    const courseEditHandler = (course) => () => {
-        setCourseData(course);
-    }
-
-return (
-  data.map((dataPoint) => {
+  return data.map((dataPoint) => {
     return (
-        
       <div className="col-lg-4" key={dataPoint._id}>
         <div
           className={`card__content ${
@@ -35,15 +31,20 @@ return (
           <div className="row justify-content-end">
             {isEditable ? (
               <div className="card__editable">
-              <a data-toggle="modal" data-target="#exampleModal" className="text-right link-dark" onClick={courseEditHandler(dataPoint)}>
-              <i class="bi bi-pencil-square"></i>
-              </a>
+                <a
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  className="text-right link-dark"
+                  onClick={courseEditHandler(dataPoint)}
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </a>
               </div>
             ) : null}
           </div>
           <div className="row justify-content-center">
             <img
-              src={`../../static/${dataPoint.img}`}
+              src={dataPoint.imageUrl}
               alt={dataPoint.name}
               className="rounded-circle home__portrait"
             />
@@ -58,7 +59,12 @@ return (
             </p>
             {isTutorData ? (
               <>
-                <p>{dataPoint.courses.length?renderCourseNames(dataPoint.courses):""}</p>
+                <p>
+                  {dataPoint.courses.length
+                    ? renderCourseNames(dataPoint.courses)
+                    : ""}
+                </p>
+                
                 <Link to={`/tutor/${dataPoint._id}`}>
                   <p
                     className={`btn btn-secondary ${
@@ -86,17 +92,31 @@ return (
             )}
           </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div className="form-group">
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Modal title
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div className="form-group">
                   <label htmlFor="course_name">Course Name</label>
                   <input
                     className="form-control"
@@ -105,12 +125,13 @@ return (
                     id="course_name"
                     placeholder="XYZ"
                     value={courseData?.name}
-                    onChange={(e)=> setCourseData({ ...courseData, name: e.target.value }) }
+                    onChange={(e) =>
+                      setCourseData({ ...courseData, name: e.target.value })
+                    }
                     required
-                   
                   />
                 </div>
-               
+
                 <div className="form-group">
                   <label htmlFor="descripton">Descripton</label>
                   <textarea
@@ -120,7 +141,9 @@ return (
                     id="description"
                     placeholder="Please enter your description"
                     value={courseData?.desc}
-                    onChange={(e)=>setCourseData({ ...courseData, desc: e.target.value }) }
+                    onChange={(e) =>
+                      setCourseData({ ...courseData, desc: e.target.value })
+                    }
                   />
                 </div>
                 <div className="form-group">
@@ -136,18 +159,25 @@ return (
                 </div>
 
                 <br />
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
-  })
-)}
+  });
+};
 
 export default Card;
