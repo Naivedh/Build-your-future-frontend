@@ -32,13 +32,14 @@ const SignUp = () => {
         "email": email, 
         "password": password,
         "name": name, 
+        "about":about,
         "desc": desc
       };
 
-      // if (!password.match('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')) {
-      //   setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
-      //   return;
-      // }
+      if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password)) {
+        setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
+        return;
+      }
 
       const formData = new window.FormData();
 
@@ -60,10 +61,8 @@ const SignUp = () => {
         formData.append('image', image);
       }
       const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
-      console.log(data);
-      navigate("/signin");
+      navigate("/login");
     } catch (err) {
-      console.log('In here');
       console.log(err);
       setError(err);
     }
