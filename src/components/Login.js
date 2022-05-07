@@ -31,7 +31,7 @@ const Login = () => {
         navigate('/');
       }
     } catch (err) {
-      setError(err.response.data);
+      setError(err);
     }
   };
   return (
@@ -43,6 +43,9 @@ const Login = () => {
               <h2>Login</h2>
 
               <form className="login__login__form__container" method="post" id="f1">
+              {error ? <div class="alert alert-danger" role="alert">
+               {error.response?.data?.message || error.message}
+              </div> : null }
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input
@@ -69,11 +72,7 @@ const Login = () => {
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                   />
-                  {error ? <div className="error__message">
-                    {error.message}
-                  </div> : null}
                 </div>
-               
 
                 <div className="m-t-lg">
                   <ul className="list-inline">
