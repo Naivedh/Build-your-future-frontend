@@ -4,26 +4,40 @@ import { useTutor } from "../TutorContextProvider";
 
 import "../css/Tutor_Course.css";
 import Card from "./Card";
+import { httpGet } from "../utils/api";
 
 const Tutor = () => {
-  const data = useTutor();
-  const params = useParams();
+  // const data = useTutor();
+  // const params = useParams();
   const navigate = useNavigate();
-
+  const [tutor, setTuor] = useState();
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
   const [imageUrl, ] = useState();
+  
 
-  const tutor = data.instructors.find((tutor) => tutor._id === params.id);
-
+  //for tutor update
   const submitSignUpData = async () => {
   }
+  
   useEffect(() => {
     if (tutor === undefined) {
       navigate("/error");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(()=>{
+    (async ()=>{
+        try{
+            const data = await httpGet("/tutorapi/tutor/params.id")
+            console.log(JSON.stringify(data));
+            setTuor(data)
+        }catch(err){
+            console.log(err)
+        }
+    })()
+},[]);
 
   if (tutor === undefined) {
     return "";

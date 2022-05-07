@@ -3,17 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTutor } from "../TutorContextProvider";
 
 import "../css/Tutor_Course.css";
-import Card from "./Card";
+import "../css/Home.css";
+import "../css/Card.css";
 
 const Favourite = () => {
   const data = useTutor();
   const params = useParams();
 
+ 
 
-  const tutor = data.instructors.find((tutor) => tutor._id === params.id);
-
-  const submitSignUpData = async () => {
-  }
+  const submitSignUpData = async () => {};
   // useEffect(() => {
   //   if (tutor === undefined) {
   //     navigate("/error");
@@ -21,32 +20,38 @@ const Favourite = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  if (tutor === undefined) {
-    return "";
-  }
-
   return (
     <div className="container">
-      
-      <div className="row course__heading">
-        <p>Courses</p>
-      </div>
       <div className="row home__row">
-        {/* false :is tutor false:cannot edit */}
-        {Card(tutor.courses, false, false)}
-        {false ? null : (
-          <div className="home__tutor col-lg-4">
-            <div className="tutor__course__add">
-              <div>
-                <i className="bi bi-plus" data-toggle="modal" data-target="#exampleModal"></i>
-              </div>
+        <div class="col-lg-4">
+          <div class="card__content card__content__nohover">
+            <div class="row justify-content-end"></div>
+            <div class="row justify-content-center">
+              <img
+                src="../../static/_1.webp"
+                alt="Web Programming"
+                class="rounded-circle home__portrait"
+              />
+              <h5>Web Programming</h5>
+              <p class="card-text home__tutor__stars mb-0">
+                <small class="text-muted">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                </small>
+              </p>
+              <p></p>
+              <a href="/course/asdklaskdlaksd">
+                <p class="btn btn-secondary card__button">View details »</p>
+              </a>
+              <a href="/course/asdklaskdlaksd">
+                <p class="btn btn-danger">Remove Course</p>
+              </a>
             </div>
           </div>
-        )}
+        </div>
       </div>
-  
- 
-    
     </div>
   );
 };

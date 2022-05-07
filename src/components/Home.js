@@ -3,6 +3,7 @@ import { useTutor } from '../TutorContextProvider';
 import '../css/Home.css';
 import { useFilterSearch ,useSearch } from '../SearchContextProvider';
 import Card from './Card';
+import { httpGet } from '../utils/api';
 
 const Home = (props) => {
     const originalData = useTutor().instructors;
@@ -20,14 +21,27 @@ const Home = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(()=>{
+        (async ()=>{
+            try{
+                const data = await httpGet("/tutorapi/tutors")
+                console.log(JSON.stringify(data));
+                setData(data)
+            }catch(err){
+                console.log(err)
+            }
+        })()
+    },[]);
+
    useEffect(() => {
     if (filterText !== "") {
         const instructorNameMatches = originalData.filter(instructor => instructor.name.toLowerCase().startsWith(filterText.toLowerCase()));
+
         const courseNameMatches = originalData.filter(instructor => {
             const courses = instructor.courses;
             for(let i=0; i<courses.length; i++) {
-                const { title } = courses[i];
-                if (title.toLowerCase().startsWith(filterText.toLowerCase())) {
+                const { name } = courses[i];
+                if (name.toLowerCase().startsWith(filterText.toLowerCase())) {
                     return true;
                 }
             }

@@ -17,7 +17,6 @@ const Login = () => {
     if (error) {
       setError(null);
     }
-    // console.log("In here");
     
     try {
       const loginData = {
