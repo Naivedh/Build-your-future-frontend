@@ -76,7 +76,7 @@ const SignUp = () => {
               <h2>Sign Up</h2>
 
               <form className="signup__signup__form__container" id="f1">
-              {error ? <div class="alert alert-danger p-2" role="alert">
+              {error ? <div className="alert alert-danger p-2" role="alert">
                {error.response?.data?.message || error.message}
               </div> : null }
                 <div className="form-group">

@@ -196,7 +196,7 @@ const Profile = () => {
       {!isTutor?(
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        {Card(tutor.courses, false, true)}
+        <Card data={tutor.courses} isTutorData={false} isEditable={false}/>
         </div>):null};
         </div>
     </div>

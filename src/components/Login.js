@@ -47,7 +47,7 @@ const Login = () => {
               <h2>Login</h2>
 
               <form className="login__login__form__container" method="post" id="f1">
-              {error ? <div class="alert alert-danger p-2" role="alert">
+              {error ? <div className="alert alert-danger p-2" role="alert">
                {error.response?.data?.message || error.message}
               </div> : null }
                 <div className="form-group">

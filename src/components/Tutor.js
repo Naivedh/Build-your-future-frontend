@@ -72,7 +72,7 @@ const Tutor = () => {
       </div>
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        {Card(tutor.courses, false, false)}
+        <Card data={tutor.courses} isTutorData={false} isEditable={false}/>
         {false ? null : (
           <div className="home__tutor col-lg-4">
             <div className="tutor__course__add">
@@ -84,30 +84,30 @@ const Tutor = () => {
         )}
       </div>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Add new Course
               </h5>
               <button
                 type="button"
                 
-                class="btn-close"
+                className="btn-close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
                 
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
             <div className="form-group">
                   <label htmlFor="course_name">Course Name</label>
                   <input
@@ -152,15 +152,15 @@ const Tutor = () => {
 
 
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" class="btn btn-success" onClick={submitSignUpData}>
+              <button type="button" className="btn btn-success" onClick={submitSignUpData}>
                 Save changes
               </button>
             </div>
