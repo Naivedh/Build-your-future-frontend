@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTutor } from '../TutorContextProvider';
 import '../css/Home.css';
-import { useFilterSearch ,useSearch } from '../SearchContextProvider';
+import { useFilterSearch ,useSearch } from '../context/SearchContextProvider';
 import Card from './Card';
 import { httpGet } from '../utils/api';
 

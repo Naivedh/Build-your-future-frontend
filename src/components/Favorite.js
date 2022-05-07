@@ -23,30 +23,30 @@ const Favourite = () => {
   return (
     <div className="container">
       <div className="row home__row">
-        <div class="col-lg-4">
-          <div class="card__content card__content__nohover">
-            <div class="row justify-content-end"></div>
-            <div class="row justify-content-center">
+        <div className="col-lg-4">
+          <div className="card__content card__content__nohover">
+            <div className="row justify-content-end"></div>
+            <div className="row justify-content-center">
               <img
                 src="../../static/_1.webp"
                 alt="Web Programming"
-                class="rounded-circle home__portrait"
+                className="rounded-circle home__portrait"
               />
               <h5>Web Programming</h5>
-              <p class="card-text home__tutor__stars mb-0">
-                <small class="text-muted">
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
+              <p className="card-text home__tutor__stars mb-0">
+                <small className="text-muted">
+                  <i className="bi bi-star-fill"></i>
+                  <i className="bi bi-star-fill"></i>
+                  <i className="bi bi-star-fill"></i>
+                  <i className="bi bi-star-fill"></i>
                 </small>
               </p>
               <p></p>
               <a href="/course/asdklaskdlaksd">
-                <p class="btn btn-secondary card__button">View details »</p>
+                <p className="btn btn-secondary card__button">View details »</p>
               </a>
               <a href="/course/asdklaskdlaksd">
-                <p class="btn btn-danger">Remove Course</p>
+                <p className="btn btn-danger">Remove Course</p>
               </a>
             </div>
           </div>
