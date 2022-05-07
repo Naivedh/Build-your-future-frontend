@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) =>  {
     useEffect(() => {
         (async () => {
             try {
-                const data = await httpPost('/auth/check');
+                const data = await httpPost('/authapi/check');
                 setAuthConfig(data);
             } catch (err) {
                 setAuthConfig(null);

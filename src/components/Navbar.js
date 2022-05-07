@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContextProvider';
 import '../css/Navbar.css'
 import { useFilterSearch, useSearch } from '../SearchContextProvider';
+import { httpGet } from '../utils/api';
+
 const Navbar = (props) => {
     const [ search, setSearch ] = useSearch();
     const [ filterText, setFiltertext ] = useFilterSearch();
-    const [ isSignedIn, setIsSignedIn ] = useState(false);
+    const [authConfig, setAuthConfig] = useAuthContext();
+    const navigate = useNavigate();
+    const isSignedIn = authConfig !== null;
 
     const applySearch = ({ target: { value }}) => {
       setFiltertext(value);
+    }
+
+    const handleLogout = async (e) => {
+      e.preventDefault();
+      try {
+        await httpGet('/authapi/logout');
+        setAuthConfig(null);
+        navigate('/login');
+      } catch (err) {
+        console.log("Error occurred while logging out ", err);
+      }
     }
 
     return (
@@ -48,7 +64,7 @@ const Navbar = (props) => {
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/appointments"><i className="bi bi-calendar-check"></i> Appointments</Link>
                         <div className="dropdown-divider"></div>
-                        <Link className="dropdown-item" to="/#"><i className="bi bi-box-arrow-left"></i> Logout</Link>
+                        <Link className="dropdown-item" to="/login" onClick={handleLogout}><i className="bi bi-box-arrow-left"></i> Logout</Link>
                       </>)
                     :(<>
                         <Link className="dropdown-item" to="/login"><i className="bi bi-box-arrow-in-right"></i> SignIn</Link>
