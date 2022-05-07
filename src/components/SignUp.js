@@ -3,23 +3,8 @@ import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
 
-
-// let formdata = new FormData();
-//       formdata.append("name", this.name);
-//       formdata.append("speciality", this.forte);
-//       formdata.append("location", this.location);
-//       formdata.append("image", this.image);
-//       formdata.append("cuisines", this.foodServed);
-//       formdata.append("tables", this.tables);
-//       formdata.append("openhrs", openHours);
-//       const upload = await fetch("/master/collect", {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//         },
-//         credentials: "same-origin",
-//         body: formdata,
-//       });
+const TUTOR_SIGNUP_API = "/tutorapi/tutorSignUp";
+const STUDENT_SIGNUP_API = "/studenapi/studentSignUp";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -31,10 +16,14 @@ const SignUp = () => {
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
   const [isTutor, setIsTutor] = useState(false);
+  const [error, setError] = useState();
 
   const submitSignUpData = async (e) => {
     try {
       e.preventDefault();
+      if (error) {
+        setError();
+      }
       const commonKeys = {
         "email": email, 
         "password": password,
@@ -63,10 +52,11 @@ const SignUp = () => {
         formData.append('image', image);
       }
       
-      const data = await httpPost("/tutorapi/postTutorSignUp", formData);
-      console.log(data);
+      const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
+      // console.log(data);
     } catch (err) {
       console.log(err);
+      setError(err);
     }
   };
 
@@ -77,7 +67,10 @@ const SignUp = () => {
             <div className="container__child signup__form">
               <h2>Sign Up</h2>
 
-              <form  id="f1">
+              <form className="signup__signup__form__container" id="f1">
+              {error ? <div class="alert alert-danger" role="alert">
+               Some error occurred
+              </div> : null }
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input
