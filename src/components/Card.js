@@ -48,7 +48,6 @@ const Card = (data, isTutorData, isEditable) => {
               alt={dataPoint.name}
               className="rounded-circle home__portrait"
             />
-
             <h5>{dataPoint.name}</h5>
             <p className="card-text home__tutor__stars mb-0">
               <small className="text-muted">
@@ -64,7 +63,7 @@ const Card = (data, isTutorData, isEditable) => {
                     ? renderCourseNames(dataPoint.courses)
                     : ""}
                 </p>
-                
+
                 <Link to={`/tutor/${dataPoint._id}`}>
                   <p
                     className={`btn btn-secondary ${
