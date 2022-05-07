@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Home.css";
 import "../css/Card.css";
@@ -13,7 +13,7 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = (data, isTutorData, isEditable) => {
+const Card = ({data, isTutorData, isEditable}) => {
   const [courseData, setCourseData] = useState(null);
 
   const courseEditHandler = (course) => () => {

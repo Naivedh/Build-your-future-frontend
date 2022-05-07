@@ -72,7 +72,7 @@ const Tutor = () => {
       </div>
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        {Card(tutor.courses, false, false)}
+        <Card data={tutor.courses} isTutorData={false} isEditable={false}/>
         {false ? null : (
           <div className="home__tutor col-lg-4">
             <div className="tutor__course__add">

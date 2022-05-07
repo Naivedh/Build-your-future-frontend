@@ -2,7 +2,7 @@ import Routes from './components/Routing';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { TutorContextProvider } from './TutorContextProvider';
-import { SearchContextProvider } from './SearchContextProvider';
+import { SearchContextProvider } from './context/SearchContextProvider';
 import { AuthContextProvider } from './context/AuthContextProvider';
 
 function App() {

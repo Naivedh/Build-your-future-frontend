@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Navbar.css'
-import { useFilterSearch, useSearch } from '../SearchContextProvider';
+import { useFilterSearch, useSearch } from '../context/SearchContextProvider';
 const Navbar = (props) => {
     const [ search, setSearch ] = useSearch();
     const [ filterText, setFiltertext ] = useFilterSearch();
