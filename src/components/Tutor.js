@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useTutor } from "../TutorContextProvider";
-
 import "../css/Tutor_Course.css";
 import Card from "./Card";
 import { httpGet } from "../utils/api";
+import Loader from "./Loader";
 
 const Tutor = () => {
-  // const data = useTutor();
-  // const params = useParams();
+  const params = useParams();
   const navigate = useNavigate();
+  const[loading, setLoading] = useState(true);
   const [tutor, setTuor] = useState();
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
@@ -20,21 +19,15 @@ const Tutor = () => {
   const submitSignUpData = async () => {
   }
   
-  useEffect(() => {
-    if (tutor === undefined) {
-      navigate("/error");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(()=>{
     (async ()=>{
         try{
-            const data = await httpGet("/tutorapi/tutor/params.id")
-            console.log(JSON.stringify(data));
+            const data = await httpGet(`/tutorapi/tutor/${params.id}`)
             setTuor(data)
+            setLoading(false)
         }catch(err){
             console.log(err)
+            // navigate("/error");
         }
     })()
 },[]);
@@ -43,6 +36,9 @@ const Tutor = () => {
     return "";
   }
 
+  if(loading){
+    return <Loader/>;
+  }
   return (
     <div className="container">
       <div className="row">
