@@ -26,6 +26,7 @@ const Login = () => {
       };
       const data = await httpPost(LOGIN_API, loginData);
       
+      // console.log(data);
       if (data.isTutor) {
         navigate(`/tutor/${data.tutor._id}`);
       } else {
