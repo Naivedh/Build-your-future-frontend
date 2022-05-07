@@ -66,8 +66,8 @@
     font-weight: 700;
 }
 
-.course__button .btn-warning:focus{
-border: 0 !important;
+.course__button .btn-warning:focus, .course__button .btn-secondary:focus, .course__button .btn-success:focus{
+    box-shadow: none;
 }
 
 .course__comment__card{

@@ -8,6 +8,16 @@
     margin: 1rem;
     font-size: 25px;
 }
+
+.card__editable{
+    background-color: rgba(255, 255, 255, 0.896);
+    color: black;
+    border-radius: 50%;
+    width: auto;
+    text-align: center;
+    padding: 0.5rem;
+}
+
 .col-lg-4 .card__content__hover:hover {
     box-shadow: 0px 1px 7px 4px rgba(0,0,0,0.1);
     -webkit-box-shadow: 0px 1px 7px 4px rgba(0,0,0,0.1);
