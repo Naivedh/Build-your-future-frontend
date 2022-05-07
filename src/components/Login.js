@@ -3,6 +3,7 @@ import "../css/SignIn.css";
 import { useNavigate } from "react-router-dom";
 
 import { httpPost } from "../utils/api";
+import { useAuthContext } from "../context/AuthContextProvider";
 
 const LOGIN_API = "/authapi/login";
 
@@ -10,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
+  const [authConfig, setAuthConfig] = useAuthContext();
   const navigate = useNavigate();
 
   const submitLoginData = async (e) => {
@@ -31,6 +33,7 @@ const Login = () => {
       } else {
         navigate('/');
       }
+      setAuthConfig(data);
     } catch (err) {
       setError(err);
     }
