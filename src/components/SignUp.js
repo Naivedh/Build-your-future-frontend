@@ -31,6 +31,11 @@ const SignUp = () => {
         "desc": desc
       };
 
+      if (!password.match('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')) {
+        setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
+        return;
+      }
+
       const formData = new window.FormData();
 
       Object.keys(commonKeys).forEach(k => {
