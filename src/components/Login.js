@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import "../css/SignIn.css";
+import { useNavigate } from "react-router-dom";
+
 import { httpPost } from "../utils/api";
 
 const LOGIN_API = "/authapi/login";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const submitLoginData = async (e) => {
     e.preventDefault();
+    if (error) {
+      setError(null);
+    }
     // console.log("In here");
     try {
       const loginData = {
@@ -17,9 +24,14 @@ const Login = () => {
         password,
       };
       const data = await httpPost(LOGIN_API, loginData);
-      console.log(data);
+      
+      if (data.isTutor) {
+        navigate(`/tutor/${data.tutor._id}`);
+      } else {
+        navigate('/');
+      }
     } catch (err) {
-      console.log(err);
+      setError(err.response.data);
     }
   };
   return (
@@ -57,6 +69,9 @@ const Login = () => {
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                   />
+                  {error ? <div className="error__message">
+                    {error.message}
+                  </div> : null}
                 </div>
                
 
