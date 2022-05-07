@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
@@ -7,6 +8,8 @@ const TUTOR_SIGNUP_API = "/tutorapi/tutorSignUp";
 const STUDENT_SIGNUP_API = "/studenapi/studentSignUp";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -16,20 +19,27 @@ const SignUp = () => {
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
   const [isTutor, setIsTutor] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
 
   const submitSignUpData = async (e) => {
+    
     try {
       e.preventDefault();
       if (error) {
-        setError();
+        setError(null);
       }
       const commonKeys = {
         "email": email, 
         "password": password,
         "name": name, 
+        "about":about,
         "desc": desc
       };
+
+      if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password)) {
+        setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
+        return;
+      }
 
       const formData = new window.FormData();
 
@@ -45,15 +55,13 @@ const SignUp = () => {
 
       startDate.setHours(Number(startHour), Number(startMinute), 0);
       endDate.setHours(Number(endHour), Number(endMinute), 0);
-
       if (isTutor) {
         formData.append('workingHourStart', startDate.getTime());
         formData.append('workingHourEnd', endDate.getTime());
         formData.append('image', image);
       }
-      
       const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
-      // console.log(data);
+      navigate("/login");
     } catch (err) {
       console.log(err);
       setError(err);
@@ -68,8 +76,8 @@ const SignUp = () => {
               <h2>Sign Up</h2>
 
               <form className="signup__signup__form__container" id="f1">
-              {error ? <div class="alert alert-danger" role="alert">
-               Some error occurred
+              {error ? <div class="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
               </div> : null }
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
