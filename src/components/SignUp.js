@@ -71,14 +71,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="signup__signup__image__container">
+    
+    <div className="container signup__container">
+    
             <div className="container__child signup__form">
               <h2>Sign Up</h2>
 
-              <form className="signup__signup__form__container" id="f1">
+              <form  id="f1">
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input
@@ -200,7 +199,7 @@ const SignUp = () => {
                   <ul className="list-inline">
                     <li>
                       <input
-                        className="btn btn--form"
+                        className="btn btn-light"
                         type="submit"
                         value="Sign Up"
                         onClick={submitSignUpData}
@@ -215,10 +214,9 @@ const SignUp = () => {
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <div className="col-lg-6"></div>
-      </div>
+      
+        
+      
     </div>
   );
 };

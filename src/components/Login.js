@@ -35,11 +35,11 @@ const Login = () => {
     }
   };
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="signup__signup__image__container">
-            <div className="container__child login__form">
+    <div className="container signup__container">
+      {/* <div className="row">
+        <div className="col-lg-6"> */}
+          {/* <div className="signup__signup__image__container"> */}
+          <div className="container__child signup__form">
               <h2>Login</h2>
 
               <form className="login__login__form__container" method="post" id="f1">
@@ -79,7 +79,7 @@ const Login = () => {
                   <ul className="list-inline">
                     <li>
                       <input
-                        className="btn btn--form"
+                        className="btn btn-light"
                         type="submit"
                         value="Sign In"
                         onClick={submitLoginData}
@@ -90,10 +90,10 @@ const Login = () => {
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <div className="col-lg-6"></div>
-      </div>
+          {/* </div> */}
+        {/* </div> */}
+     
+      {/* </div> */}
     </div>
   );
 };
