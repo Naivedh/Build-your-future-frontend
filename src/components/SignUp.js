@@ -19,14 +19,14 @@ const SignUp = () => {
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
   const [isTutor, setIsTutor] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
 
   const submitSignUpData = async (e) => {
     
     try {
       e.preventDefault();
       if (error) {
-        setError();
+        setError(null);
       }
       const commonKeys = {
         "email": email, 
@@ -63,6 +63,7 @@ const SignUp = () => {
       console.log(data);
       navigate("/signin");
     } catch (err) {
+      console.log('In here');
       console.log(err);
       setError(err);
     }
@@ -76,8 +77,8 @@ const SignUp = () => {
               <h2>Sign Up</h2>
 
               <form className="signup__signup__form__container" id="f1">
-              {error ? <div class="alert alert-danger" role="alert">
-               Some error occurred
+              {error ? <div class="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
               </div> : null }
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
