@@ -58,7 +58,7 @@ return (
             </p>
             {isTutorData ? (
               <>
-                <p>{renderCourseNames(dataPoint.courses)}</p>
+                <p>{dataPoint.courses.length?renderCourseNames(dataPoint.courses):""}</p>
                 <Link to={`/tutor/${dataPoint._id}`}>
                   <p
                     className={`btn btn-secondary ${
