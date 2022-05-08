@@ -11,11 +11,10 @@ const Tutor = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [tutor, setTuor] = useState();
-  const [course_name, setCourse] = useState("");
-  const [desc, setDesc] = useState("");
-  const [image, setImage] = useState();
   const [authConfig, setAuthConfig] = useAuthContext();
   const [comment, setComment]= useState("");
+
+  const [currentCourseData, setCurrentCourseData] = useState(null);
 
   const isEditable = authConfig?.isTutor; // true for tutor, false for student
 
@@ -35,18 +34,24 @@ const Tutor = () => {
   }
 
   //for tutor update
-  const submitEditedData = async () => {
+  const submitEditedData = (editedCourse) => async () => {
     try {
       const formData = new window.FormData();
-      formData.append('name', course_name);
-      formData.append('desc',desc);
-      formData.append('image',image);
+      formData.append('name', editedCourse.name);
+      formData.append('desc', editedCourse.desc);
+      formData.append('image', editedCourse.image);
       await httpPost("/tutorapi/tutorCourse", formData);
     } catch (err) {
       console.log(err);
       // navigate("/error");
     }
   };
+
+  const resetModalData = () => {
+    setCurrentCourseData(null);
+  }
+
+  const updateCurrentCourse = (courseToEdit) => setCurrentCourseData(courseToEdit);
 
   useEffect(() => {
     (async () => {
@@ -130,7 +135,15 @@ const Tutor = () => {
       </div>
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        <Card data={tutor.courses} isTutorData={false} isEditable={isEditable}/>
+        <Card 
+          data={tutor.courses} 
+          isTutorData={false} 
+          isEditable={isEditable} 
+          currentCourseData={currentCourseData}
+          updateCurrentCourse={updateCurrentCourse} 
+          submitEditedData={submitEditedData} 
+          resetModalData={resetModalData}
+          />
         {isEditable ? (
           <div
             className="home__tutor col-lg-4"
@@ -152,7 +165,7 @@ const Tutor = () => {
         
         {!isEditable?(
           <div className="row px-5 py-2 mx-5">
-            <label htmlFor="course_name" className="py-2 px-3">Add Comment</label>
+            <label htmlFor="courseName" className="py-2 px-3">Add Comment</label>
             <div className="col-10">
               <div className="form-group">
                 <input
@@ -182,90 +195,6 @@ const Tutor = () => {
         <div className="course__comment__card">
           {commentCard()}
           {commentCard()}
-        </div>
-      </div>
-
-          {/* modal  */}
-
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Add new Course
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="form-group">
-                <label htmlFor="course_name">Course Name</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="course_name"
-                  id="course_name"
-                  placeholder="XYZ"
-                  value={course_name}
-                  onChange={(e) => setCourse(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="descripton">Descripton</label>
-                <textarea
-                  className="form-control"
-                  type="text"
-                  name="description"
-                  id="description"
-                  placeholder="Please enter your description"
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="photo">Picture</label>
-                <input
-                  className="form-control"
-                  type="file"
-                  id="coursephoto"
-                  name="coursephoto"
-                  onChange={(e) => setImage(e.target.files[0])}
-                  // value={image?.fileName}
-                />
-              </div>
-
-              <br />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-danger"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={submitEditedData}
-              >
-                Save changes
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -14,14 +14,12 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = ({data, isTutorData, isEditable}) => {
-  const [authConfig, setAuthConfig] = useAuthContext();
-  const [courseData, setCourseData] = useState(null);
+const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData, updateCurrentCourse, currentCourseData, resetModalData }) => {
 
   const courseEditHandler = (course) => (e) => {
     if (isEditable) {
       e.preventDefault();
-      setCourseData(course);
+      updateCurrentCourse(course);
     }
   };
 
@@ -88,6 +86,8 @@ const Card = ({data, isTutorData, isEditable}) => {
                 <Link 
                   data-toggle="modal"
                   data-target="#exampleModal"
+                  data-backdrop="static" 
+                  data-keyboard="false"
                   to={`/course/${dataPoint._id}`} 
                   onClick={courseEditHandler(dataPoint)}
                 >
@@ -119,16 +119,15 @@ const Card = ({data, isTutorData, isEditable}) => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
+                  {currentCourseData?.imageUrl ? 'Edit Course' : 'Add new course'}
                 </h5>
                 <button
                   type="button"
-                  className="close"
+                  className="btn-close"
                   data-dismiss="modal"
                   aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                  onClick={resetModalData}
+              ></button>
               </div>
               <div className="modal-body">
                 <div className="form-group">
@@ -139,9 +138,9 @@ const Card = ({data, isTutorData, isEditable}) => {
                     name="course_name"
                     id="course_name"
                     placeholder="XYZ"
-                    value={courseData?.name}
+                    value={currentCourseData?.name}
                     onChange={(e) =>
-                      setCourseData({ ...courseData, name: e.target.value })
+                      updateCurrentCourse({ ...currentCourseData, name: e.target.value })
                     }
                     required
                   />
@@ -155,9 +154,9 @@ const Card = ({data, isTutorData, isEditable}) => {
                     name="description"
                     id="description"
                     placeholder="Please enter your description"
-                    value={courseData?.desc}
+                    value={currentCourseData?.desc}
                     onChange={(e) =>
-                      setCourseData({ ...courseData, desc: e.target.value })
+                      updateCurrentCourse({ ...currentCourseData, desc: e.target.value })
                     }
                   />
                 </div>
@@ -168,7 +167,8 @@ const Card = ({data, isTutorData, isEditable}) => {
                     type="file"
                     id="userphoto"
                     name="userphoto"
-                    value={courseData?.image}
+                    value={currentCourseData?.image}
+                    onChange={(e) => updateCurrentCourse({...currentCourseData, image: e.target.files[0] }) }
                     // what to do?
                   />
                 </div>
@@ -176,17 +176,22 @@ const Card = ({data, isTutorData, isEditable}) => {
                 <br />
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+                onClick={resetModalData}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={submitEditedData && submitEditedData(currentCourseData)}
+              >
+                Save changes
+              </button>
+            </div>
             </div>
           </div>
         </div>
