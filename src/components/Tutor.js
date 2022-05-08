@@ -21,6 +21,7 @@ const Tutor = () => {
   //for tutor update
   const submitEditedData = async () => {
     try {
+      console.log("hel;lo")
       const formData = new window.FormData();
       formData.append('name', course_name);
       formData.append('desc',desc);
