@@ -16,6 +16,8 @@ const Tutor = () => {
   const [image, setImage] = useState();
   const [authConfig, setAuthConfig] = useAuthContext();
   const [comment, setComment]= useState("");
+  const [comments, setComments]= useState();
+
 
   const isEditable = authConfig?.isTutor; // true for tutor, false for student
 
@@ -27,7 +29,9 @@ const Tutor = () => {
         tutorId:tutor._id,
         text:comment,
       }
-      await httpPost("/feedbackapi/feedback", data);
+      let newData = await httpPost("/feedbackapi/feedback", data);
+      console.log(newData)
+      // setComments()
     } catch (err) {
       console.log(err);
       // navigate("/error");
@@ -54,6 +58,9 @@ const Tutor = () => {
         const data = await httpGet(`/tutorapi/tutor/${params.id}`);
         // console.log(data);
         setTuor(data[0]);
+        const comments = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
+        console.log(comments);
+        setComments(comments[0]);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -68,26 +75,23 @@ const Tutor = () => {
 
 
 
-  const commentCard = () => {
+  const commentCard = (comment) => {
     return (
-      <div className="card">
+      <div className="card" key={comment.studentId}>
         <div className="card-body row">
           <div className="col-lg-12 course__comment__image">
-            <img src="../../static/_1.webp" alt="img" />
+            <img src={comment.imageUrl} alt={comment.studentName} />
             <div className="course__comment__text">
               <>
                 <div className="row">
-                  <div className="col-lg-10">
-                    <p className="course__comment__text__name">Name</p>
+                  <div className="col-lg-12">
+                    <p className="course__comment__text__name">{comment.studentName}</p>
                   </div>
-                  <div className="col-lg-2">.... 2 days ago</div>
+                  {/* <div className="col-lg-2">.... 2 days ago</div> */}
                 </div>
               </>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute
+                {comment.text}
               </p>
             </div>
           </div>
@@ -180,8 +184,9 @@ const Tutor = () => {
         ):null}
 
         <div className="course__comment__card">
-          {commentCard()}
-          {commentCard()}
+            {comments.responses.length
+            ?comments.responses.map((comment)=>commentCard(comment))
+            :<p className="text-center">No comments yet</p>}
         </div>
       </div>
 
