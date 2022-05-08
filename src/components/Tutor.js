@@ -30,8 +30,7 @@ const Tutor = () => {
         text:comment,
       }
       let newData = await httpPost("/feedbackapi/feedback", data);
-      console.log(newData)
-      // setComments()
+      setComments(newData)
     } catch (err) {
       console.log(err);
       // navigate("/error");
@@ -45,7 +44,8 @@ const Tutor = () => {
       formData.append('name', course_name);
       formData.append('desc',desc);
       formData.append('image',image);
-      await httpPost("/tutorapi/tutorCourse", formData);
+      let data = await httpPost("/tutorapi/tutorCourse", formData);
+      console.log(data)
     } catch (err) {
       console.log(err);
       // navigate("/error");
@@ -56,10 +56,10 @@ const Tutor = () => {
     (async () => {
       try {
         const data = await httpGet(`/tutorapi/tutor/${params.id}`);
-        // console.log(data);
+        console.log(data);
         setTuor(data[0]);
         const comments = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
-        console.log(comments);
+        // console.log(comments);
         setComments(comments[0]);
         setLoading(false);
       } catch (err) {
@@ -156,7 +156,7 @@ const Tutor = () => {
         
         {!isEditable?(
           <div className="row px-5 py-2 mx-5">
-            <label htmlFor="course_name" className="py-2 px-3">Add Comment</label>
+            <label htmlFor="comment" className="py-2 px-3">Add Comment</label>
             <div className="col-10">
               <div className="form-group">
                 <input

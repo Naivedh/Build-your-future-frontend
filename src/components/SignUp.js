@@ -5,7 +5,7 @@ import { httpPost } from "../utils/api";
 
 
 const TUTOR_SIGNUP_API = "/tutorapi/tutorSignUp";
-const STUDENT_SIGNUP_API = "/studenapi/studentSignUp";
+const STUDENT_SIGNUP_API = "/studentapi/studentSignUp";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -64,6 +64,7 @@ const SignUp = () => {
         // formData.append('image', image);
       }
       const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
+      
       navigate("/login");
     } catch (err) {
       console.log(err);
