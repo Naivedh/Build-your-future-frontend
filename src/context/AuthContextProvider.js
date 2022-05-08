@@ -8,19 +8,6 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) =>  {
     const [authConfig, setAuthConfig] = useState(null);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const data = await httpPost('/authapi/check');
-                setAuthConfig(data);
-            } catch (err) {
-                setAuthConfig(null);
-                navigate('/');
-            }
-        })();
-    }, []);
 
     return (
         <AuthContext.Provider value={[authConfig, setAuthConfig]}>
