@@ -51,16 +51,16 @@ const Navbar = (props) => {
          
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle"  to="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Link className="nav-link dropdown-toggle"  to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="bi bi-gear-wide-connected"></i>
                 </Link>
                 <div className="dropdown-menu" style={{right: "0", left: "auto", marginTop:".7rem"}} aria-labelledby="navbarDropdown">
                   {
                     isSignedIn
                     ?(<>
-                        <Link className="dropdown-item" to="/#"><i className="bi bi-person"></i> Profile</Link>
+                        <Link className="dropdown-item" to="/profile"><i className="bi bi-person"></i> Profile</Link>
                         <div className="dropdown-divider"></div>
-                        <Link className="dropdown-item" to="/#"><i className="bi bi-star-fill"></i> Favourites</Link>
+                        <Link className="dropdown-item" to="/favourite"><i className="bi bi-star-fill"></i> Favourites</Link>
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/appointments"><i className="bi bi-calendar-check"></i> Appointments</Link>
                         <div className="dropdown-divider"></div>
