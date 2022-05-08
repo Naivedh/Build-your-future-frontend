@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useTutor } from "../TutorContextProvider";
 
 import "../css/Tutor_Course.css";
 import "../css/Home.css";
 import "../css/Card.css";
+import Loader from "./Loader";
+import { httpGet } from "../utils/api";
 
 const Favourite = () => {
-  const data = useTutor();
-  const params = useParams();
+  const [favourite, setFavourite] = useState();
+  const[loading, setLoading] = useState(true);
 
- 
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await httpGet(`/studentapi/studentFavourite`);
+        console.log(data);
+        setFavourite(data[0])
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        // navigate("/error");
+      }
+    })();
+  }, []);
 
-  const submitSignUpData = async () => {};
-  // useEffect(() => {
-  //   if (tutor === undefined) {
-  //     navigate("/error");
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  if(loading){
+    return<Loader/>;
+  }
 
   return (
     <div className="container">

@@ -45,7 +45,7 @@ const Tutor = () => {
       formData.append('desc',desc);
       formData.append('image',image);
       let data = await httpPost("/tutorapi/tutorCourse", formData);
-      console.log(data)
+      // console.log(data)
     } catch (err) {
       console.log(err);
       // navigate("/error");
