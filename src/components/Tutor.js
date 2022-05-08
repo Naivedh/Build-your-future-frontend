@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/Tutor_Course.css";
 import Card from "./Card";
 import { httpGet, httpPost } from "../utils/api";
 import Loader from "./Loader";
+import { useAuthContext } from "../context/AuthContextProvider";
 
 const Tutor = () => {
   const params = useParams();
@@ -13,9 +14,12 @@ const Tutor = () => {
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState();
+  const [authConfig, setAuthConfig] = useAuthContext();
+
+  const isEditable = authConfig.isTutor; // true for tutor, false for student
 
   //for tutor update
-  const submitSignUpData = async () => {
+  const submitEditedData = async () => {
     try {
       console.log("hel;lo")
       const formData = new window.FormData();
@@ -75,12 +79,12 @@ const Tutor = () => {
         </div>
       </div>
       <div className="row course__heading">
-        <p>Courses</p>
+        <p>{tutor?.courses?.length === 0 ? 'No courses yet' : 'Courses'}</p>
       </div>
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        <Card data={tutor.courses} isTutorData={false} isEditable={false} />
-        {false ? null : (
+        <Card data={tutor.courses} isTutorData={false} isEditable={isEditable} />
+        {isEditable ? (
           <div
             className="home__tutor col-lg-4"
             data-toggle="modal"
@@ -92,7 +96,7 @@ const Tutor = () => {
               </div>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
       <div
         className="modal fade"
@@ -167,7 +171,7 @@ const Tutor = () => {
               <button
                 type="button"
                 className="btn btn-success"
-                onClick={submitSignUpData}
+                onClick={submitEditedData}
               >
                 Save changes
               </button>
