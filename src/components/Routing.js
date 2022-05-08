@@ -20,7 +20,15 @@ const PrivateRoute = ({ children, path, authConfig }) => {
         return <Navigate to='/login' />
     }
 
-    if (path === '/') { // id issue
+    if (path === '/') {
+        if (authConfig?.isTutor) {
+            return <Navigate to={`/tutor/${authConfig._id}`} />
+        } else {
+            return children;
+        }
+    }
+
+    if (path === '/course') {
         if (authConfig?.isTutor) {
             return <Navigate to={`/tutor/${authConfig._id}`} />
         } else {
@@ -60,7 +68,7 @@ const Routing = (props) => {
                 <Route exact path="/login" element={authConfig ? <Navigate to='/'/> : <Login/>}/>
                 <Route exact path="/signup" element={authConfig ? <Navigate to='/'/> : <SignUp/>}/>
                 <Route exact path="/tutor/:id" element={<PrivateRoute authConfig={authConfig}><Tutor/></PrivateRoute>}/>
-                <Route exact path="/course/:id" element={<PrivateRoute authConfig={authConfig}><Course/></PrivateRoute>}/>
+                <Route exact path="/course/:id" element={<PrivateRoute authConfig={authConfig} path="/course"><Course/></PrivateRoute>}/>
                 <Route exact path="/appointments" element={<PrivateRoute authConfig={authConfig}><Appointment/></PrivateRoute>}/>
                 <Route exact path="/favourite" element={<PrivateRoute authConfig={authConfig}><Favourite/></PrivateRoute>}/>
                 <Route path="/error" element={<Error/>}/>

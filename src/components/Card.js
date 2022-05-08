@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Home.css";
 import "../css/Card.css";
+import { useAuthContext } from "../context/AuthContextProvider";
 
 //second undefined
 const renderCourseNames = (courses) => {
@@ -14,13 +15,19 @@ const renderCourseNames = (courses) => {
 };
 
 const Card = ({data, isTutorData, isEditable}) => {
+  const [authConfig, setAuthConfig] = useAuthContext();
   const [courseData, setCourseData] = useState(null);
 
-  const courseEditHandler = (course) => () => {
-    setCourseData(course);
+  const courseEditHandler = (course) => (e) => {
+    if (isEditable) {
+      e.preventDefault();
+      setCourseData(course);
+    }
   };
 
-  return data.map((dataPoint) => {
+  return (
+    <>
+    {   data.map((dataPoint) => {
     return (
       <div className="col-lg-4" key={dataPoint._id}>
         <div
@@ -29,7 +36,7 @@ const Card = ({data, isTutorData, isEditable}) => {
           }`}
         >
           <div className="row justify-content-end">
-            {isEditable ? (
+            {/* {isEditable ? (
               <div className="card__editable">
                 <a
                   data-toggle="modal"
@@ -40,7 +47,7 @@ const Card = ({data, isTutorData, isEditable}) => {
                   <i className="bi bi-pencil-square"></i>
                 </a>
               </div>
-            ) : null}
+            ) : null} */}
           </div>
           <div className="row justify-content-center">
             <img
@@ -78,20 +85,29 @@ const Card = ({data, isTutorData, isEditable}) => {
               <>
                 {/* do not remove p tag => for spacing */}
                 <p></p>
-                <Link to={`/course/${dataPoint._id}`}>
+                <Link 
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                  to={`/course/${dataPoint._id}`} 
+                  onClick={courseEditHandler(dataPoint)}
+                >
                   <p
                     className={`btn btn-secondary ${
                       isTutorData ? "" : "card__button"
                     }`}
                   >
-                    View details &raquo;
+                    {isEditable ? 'Edit course' : 'View details'} &raquo;
                   </p>
                 </Link>
               </>
             )}
           </div>
         </div>
-        <div
+
+      </div>
+    );
+  })}
+          <div
           className="modal fade"
           id="exampleModal"
           tabIndex="-1"
@@ -174,9 +190,8 @@ const Card = ({data, isTutorData, isEditable}) => {
             </div>
           </div>
         </div>
-      </div>
-    );
-  });
+    </>
+  )
 };
 
 export default Card;
