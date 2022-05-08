@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useTutor } from "../TutorContextProvider";
+import { httpGet } from "../utils/api";
+import Loader from "./Loader";
+
 
 const Course = (props) => {
-  const data = useTutor();
   const params = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [course, setCourse] = useState({});
   const [isEnroll, setIsEnroll] = useState(false);
   const [isFavourite, setIsFavourite] = useState(false);
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
 
-  let course;
-  for (let i = 0; i < data.instructors.length; i++) {
-    for (let j = 0; j < data.instructors[i].courses.length; j++) {
-      if (data.instructors[i].courses[j]._id === params.id) {
-        course = data.instructors[i].courses[j];
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await httpGet(`/tutorapi/course/${params.id}`);
+        setCourse(data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        // navigate("/error");
       }
-    }
-  }
+    })();
+  }, []);
+
 
   useEffect(() => {
     if (course === undefined) {
@@ -33,6 +42,7 @@ const Course = (props) => {
 
   const changeEnroll = () => {
     setIsEnroll(true);
+
   };
   const changeFavourite = () => {
     setIsFavourite(!isFavourite);
@@ -66,13 +76,16 @@ const Course = (props) => {
     );
   };
 
+  if (loading) {
+    return <Loader/>;
+  }
   return (
     <div className="container">
       <div className="row">
         <div className="col-lg-6">
           <div className="tutor__tutor__image__container">
             <img
-              src={`../../static/${course.img}`}
+              src={course.imageUrl}
               className="tutor__tutor__image"
               alt={course.name}
             />
@@ -87,6 +100,7 @@ const Course = (props) => {
           <p className="tutor__tutor__name">{course.name}</p>
 
           <p>
+            {/* {course.desc} */}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Adipiscing bibendum est ultricies integer quis auctor elit sed

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContextProvider';
 import '../css/Navbar.css'
-import { useFilterSearch, useSearch } from '../SearchContextProvider';
+import { useFilterSearch, useSearch } from '../context/SearchContextProvider';
 import { httpGet } from '../utils/api';
 
 const Navbar = (props) => {

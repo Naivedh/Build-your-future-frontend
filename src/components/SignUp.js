@@ -55,10 +55,13 @@ const SignUp = () => {
 
       startDate.setHours(Number(startHour), Number(startMinute), 0);
       endDate.setHours(Number(endHour), Number(endMinute), 0);
+
+      //student can add image
+      formData.append('image', image);
       if (isTutor) {
         formData.append('workingHourStart', startDate.getTime());
         formData.append('workingHourEnd', endDate.getTime());
-        formData.append('image', image);
+        // formData.append('image', image);
       }
       const data = await httpPost(isTutor ? TUTOR_SIGNUP_API : STUDENT_SIGNUP_API, formData);
       navigate("/login");

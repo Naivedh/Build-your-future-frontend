@@ -2,42 +2,52 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/Tutor_Course.css";
 import Card from "./Card";
-import { httpGet } from "../utils/api";
+import { httpGet, httpPost } from "../utils/api";
 import Loader from "./Loader";
 
 const Tutor = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const[loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [tutor, setTuor] = useState();
   const [course_name, setCourse] = useState("");
   const [desc, setDesc] = useState("");
-  const [imageUrl, ] = useState();
-  
+  const [image, setImage] = useState();
 
   //for tutor update
   const submitSignUpData = async () => {
-  }
-  
-  useEffect(()=>{
-    (async ()=>{
-        try{
-            const data = await httpGet(`/tutorapi/tutor/${params.id}`)
-            setTuor(data)
-            setLoading(false)
-        }catch(err){
-            console.log(err)
-            // navigate("/error");
-        }
-    })()
-},[]);
+    try {
+      const formData = new window.FormData();
+      formData.append('name', course_name);
+      formData.append('desc',desc);
+      formData.append('image',image);
+      const data = await httpPost("/tutorapi/tutorCourse", formData);
+    } catch (err) {
+      console.log(err);
+      // navigate("/error");
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await httpGet(`/tutorapi/tutor/${params.id}`);
+        // console.log(data);
+        setTuor(data[0]);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        // navigate("/error");
+      }
+    })();
+  }, []);
 
   if (tutor === undefined) {
     return "";
   }
 
-  if(loading){
-    return <Loader/>;
+  if (loading) {
+    return <Loader />;
   }
   return (
     <div className="container">
@@ -45,7 +55,7 @@ const Tutor = () => {
         <div className="col-lg-6">
           <div className="tutor__tutor__image__container">
             <img
-              src={`../../static/${tutor.img}`}
+              src={tutor.imageUrl}
               className="tutor__tutor__image"
               alt={tutor.name}
             />
@@ -68,12 +78,16 @@ const Tutor = () => {
       </div>
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
-        <Card data={tutor.courses} isTutorData={false} isEditable={false}/>
+        <Card data={tutor.courses} isTutorData={false} isEditable={false} />
         {false ? null : (
-          <div className="home__tutor col-lg-4">
+          <div
+            className="home__tutor col-lg-4"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
             <div className="tutor__course__add">
               <div>
-                <i className="bi bi-plus" data-toggle="modal" data-target="#exampleModal"></i>
+                <i className="bi bi-plus"></i>
               </div>
             </div>
           </div>
@@ -95,58 +109,51 @@ const Tutor = () => {
               </h5>
               <button
                 type="button"
-                
                 className="btn-close"
                 data-dismiss="modal"
                 aria-label="Close"
-              >
-                
-              </button>
+              ></button>
             </div>
             <div className="modal-body">
-            <div className="form-group">
-                  <label htmlFor="course_name">Course Name</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="course_name"
-                    id="course_name"
-                    placeholder="XYZ"
-                    value={course_name}
-                    onChange={(e)=>setCourse(e.target.value)}
-                    required
-                   
-                  />
-                </div>
-               
-                <div className="form-group">
-                  <label htmlFor="descripton">Descripton</label>
-                  <textarea
-                    className="form-control"
-                    type="text"
-                    name="description"
-                    id="description"
-                    placeholder="Please enter your description"
-                    value={desc}
-                    onChange={(e)=>setDesc(e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="photo">Picture</label>
-                  <input
-                    className="form-control"
-                    type="file"
-                    id="userphoto"
-                    name="userphoto"
-                    value={imageUrl}
-                    // what to do?
-                  />
-                </div>
+              <div className="form-group">
+                <label htmlFor="course_name">Course Name</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="course_name"
+                  id="course_name"
+                  placeholder="XYZ"
+                  value={course_name}
+                  onChange={(e) => setCourse(e.target.value)}
+                  required
+                />
+              </div>
 
-                <br />
+              <div className="form-group">
+                <label htmlFor="descripton">Descripton</label>
+                <textarea
+                  className="form-control"
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="Please enter your description"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="photo">Picture</label>
+                <input
+                  className="form-control"
+                  type="file"
+                  id="coursephoto"
+                  name="coursephoto"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  // value={image?.fileName}
+                />
+              </div>
 
-
-
+              <br />
             </div>
             <div className="modal-footer">
               <button
@@ -156,7 +163,11 @@ const Tutor = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-success" onClick={submitSignUpData}>
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={submitSignUpData}
+              >
                 Save changes
               </button>
             </div>
