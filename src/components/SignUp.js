@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/SignUp.css";
 import { httpPost } from "../utils/api";
 
@@ -212,9 +212,9 @@ const SignUp = () => {
                       />
                     </li>
                     <li className="new__link">
-                      <a className="signup__link" href="/signin">
+                      <Link className="signup__link" to="/login">
                         Already a member?
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

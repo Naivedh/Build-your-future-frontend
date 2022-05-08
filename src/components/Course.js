@@ -20,6 +20,7 @@ const Course = (props) => {
       try {
         const data = await httpGet(`/tutorapi/course/${params.id}`);
         setCourse(data);
+        console.log(data)
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -48,34 +49,7 @@ const Course = (props) => {
     setIsFavourite(!isFavourite);
   };
 
-  const commentCard = () => {
-    return (
-      <div className="card">
-        <div className="card-body row">
-          <div className="col-lg-12 course__comment__image">
-            <img src="../../static/_1.webp" alt="img" />
-            <div className="course__comment__text">
-              <>
-                <div className="row">
-                  <div className="col-lg-10">
-                    <p className="course__comment__text__name">Name</p>
-                  </div>
-                  <div className="col-lg-2">.... 2 days ago</div>
-                </div>
-              </>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
+  
   if (loading) {
     return <Loader/>;
   }
@@ -158,13 +132,7 @@ const Course = (props) => {
                 <p className="tutor__tutor__desc">{tutor.desc}</p> */}
         </div>
       </div>
-      <div className="row">
-        <p className="course__heading">Comments</p>
-        <div className="course__comment__card">
-          {commentCard()}
-          {commentCard()}
-        </div>
-      </div>
+      
       <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog" role="document">
     <div className="modal-content">
