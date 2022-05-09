@@ -14,7 +14,7 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = ({data, isTutorData, closeButtonRef, mode, setMode, isEditable, submitEditedData, updateCurrentCourse, currentCourseData, resetModalData }) => {
+const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEditable, submitEditedData, updateCurrentCourse, currentCourseData, resetModalData }) => {
 
   const courseEditHandler = (course) => (e) => {
     setMode('EDIT');
@@ -76,6 +76,7 @@ const Card = ({data, isTutorData, closeButtonRef, mode, setMode, isEditable, sub
                   data-backdrop={currentCourseData && "static"} 
                   data-keyboard={currentCourseData &&"false"}
                   to={`/course/${dataPoint._id}`} 
+                  state={{ tutorId }}
                   onClick={courseEditHandler(dataPoint)}
                 >
                   <p

@@ -35,6 +35,14 @@ const PrivateRoute = ({ children, path, authConfig }) => {
             return children;
         }
     }
+
+    if (path === '/favourite') {
+        if (authConfig?.isTutor) {
+            return <Navigate to={`/tutor/${authConfig._id}`} />
+        } else {
+            return children;
+        }
+    }
     return (
         children
     );
@@ -70,7 +78,7 @@ const Routing = (props) => {
                 <Route exact path="/tutor/:id" element={<PrivateRoute authConfig={authConfig}><Tutor/></PrivateRoute>}/>
                 <Route exact path="/course/:id" element={<PrivateRoute authConfig={authConfig} path="/course"><Course/></PrivateRoute>}/>
                 <Route exact path="/appointments" element={<PrivateRoute authConfig={authConfig}><Appointment/></PrivateRoute>}/>
-                <Route exact path="/favourite" element={<PrivateRoute authConfig={authConfig}><Favourite/></PrivateRoute>}/>
+                <Route exact path="/favourite" element={<PrivateRoute authConfig={authConfig} path="/favourite"><Favourite/></PrivateRoute>}/>
                 <Route path="/error" element={<Error/>}/>
                 <Route path="/profile" element={<PrivateRoute authConfig={authConfig}><Profile/></PrivateRoute>}/>
                 <Route path="*" element={<Error/>}/>

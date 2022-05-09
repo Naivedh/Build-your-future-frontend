@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { httpGet } from "../utils/api";
 import Loader from "./Loader";
 
@@ -13,12 +13,13 @@ const Course = (props) => {
   const [isFavourite, setIsFavourite] = useState(false);
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
-
+  
+  const { tutorId } = useLocation().state;
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await httpGet(`/tutorapi/course/${params.id}`);
+        const data = await httpGet(`/tutorapi/course/${params.id}?tutorId=${tutorId}`);
         setCourse(data);
         console.log(data)
         setLoading(false);

@@ -78,7 +78,7 @@ const Tutor = () => {
     (async () => {
       try {
         const data = await httpGet(`/tutorapi/tutor/${params.id}`);
-        console.log(data);
+        // console.log(data);
         setTutor(data[0]);
         const comments = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
         // console.log(comments);
@@ -161,6 +161,7 @@ const Tutor = () => {
             isTutorData={false} 
             isEditable={isEditable}
             mode={mode}
+            tutorId={tutor?._id}
             setMode={setMode}
             closeButtonRef={closeButtonRef}
             currentCourseData={currentCourseData}

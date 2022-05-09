@@ -59,8 +59,8 @@ const Navbar = (props) => {
                     isSignedIn
                     ?(<>
                         <Link className="dropdown-item" to="/profile"><i className="bi bi-person"></i> Profile</Link>
-                        <div className="dropdown-divider"></div>
-                        <Link className="dropdown-item" to="/favourite"><i className="bi bi-star-fill"></i> Favourites</Link>
+                        {!authConfig?.isTutor && <div className="dropdown-divider"></div>}
+                        {!authConfig?.isTutor && <Link className="dropdown-item" to="/favourite"><i className="bi bi-star-fill"></i> Favourites</Link>}
                         <div className="dropdown-divider"></div>
                         <Link className="dropdown-item" to="/appointments"><i className="bi bi-calendar-check"></i> Appointments</Link>
                         <div className="dropdown-divider"></div>
