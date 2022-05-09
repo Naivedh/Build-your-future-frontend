@@ -14,9 +14,10 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData, updateCurrentCourse, currentCourseData, resetModalData }) => {
+const Card = ({data, isTutorData, closeButtonRef, mode, setMode, isEditable, submitEditedData, updateCurrentCourse, currentCourseData, resetModalData }) => {
 
   const courseEditHandler = (course) => (e) => {
+    setMode('EDIT');
     if (isEditable) {
       e.preventDefault();
       updateCurrentCourse(course);
@@ -33,20 +34,6 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
             isTutorData ? "card__content__hover" : "card__content__nohover"
           }`}
         >
-          <div className="row justify-content-end">
-            {/* {isEditable ? (
-              <div className="card__editable">
-                <a
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  className="text-right link-dark"
-                  onClick={courseEditHandler(dataPoint)}
-                >
-                  <i className="bi bi-pencil-square"></i>
-                </a>
-              </div>
-            ) : null} */}
-          </div>
           <div className="row justify-content-center">
             <img
               src={dataPoint.imageUrl}
@@ -86,8 +73,8 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
                 <Link 
                   data-toggle="modal"
                   data-target="#exampleModal"
-                  data-backdrop="static" 
-                  data-keyboard="false"
+                  data-backdrop={currentCourseData && "static"} 
+                  data-keyboard={currentCourseData &&"false"}
                   to={`/course/${dataPoint._id}`} 
                   onClick={courseEditHandler(dataPoint)}
                 >
@@ -107,19 +94,19 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
       </div>
     );
   })}
-          <div
+        <div
           className="modal fade"
           id="exampleModal"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
+          // aria-hidden="true"
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  {currentCourseData?.imageUrl ? 'Edit Course' : 'Add new course'}
+                  {mode === 'EDIT' ? 'Edit Course' : 'Add new course'}
                 </h5>
                 <button
                   type="button"
@@ -127,7 +114,7 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
                   data-dismiss="modal"
                   aria-label="Close"
                   onClick={resetModalData}
-              ></button>
+                ></button>
               </div>
               <div className="modal-body">
                 <div className="form-group">
@@ -167,9 +154,8 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
                     type="file"
                     id="userphoto"
                     name="userphoto"
-                    value={currentCourseData?.image}
+                    // value={currentCourseData?.image}
                     onChange={(e) => updateCurrentCourse({...currentCourseData, image: e.target.files[0] }) }
-                    // what to do?
                   />
                 </div>
 
@@ -180,6 +166,7 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
                 type="button"
                 className="btn btn-danger"
                 data-dismiss="modal"
+                ref={closeButtonRef}
                 onClick={resetModalData}
               >
                 Close
@@ -189,7 +176,7 @@ const Card = ({data, isTutorData, isEditable, submitEditedData, modalCourseData,
                 className="btn btn-success"
                 onClick={submitEditedData && submitEditedData(currentCourseData)}
               >
-                Save changes
+                {mode === 'EDIT' ? 'Save changes' : 'Add new course'}
               </button>
             </div>
             </div>

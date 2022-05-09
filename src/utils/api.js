@@ -24,4 +24,13 @@ const httpGet = async (url, headers) => {
     }
 }
 
-export { httpPost, httpGet };
+const httpPut = async (url, data, headers) => {
+    try {
+        const response = await axios.put(`${defaultUrl}${url}`, data, headers);
+        return response.data;
+    } catch(err) {
+        throw err;
+    }
+}
+
+export { httpPost, httpGet, httpPut };

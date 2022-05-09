@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../css/Tutor_Course.css";
 import Card from "./Card";
-import { httpGet, httpPost } from "../utils/api";
+import { httpGet, httpPost, httpPut } from "../utils/api";
 import Loader from "./Loader";
 import { useAuthContext } from "../context/AuthContextProvider";
 
@@ -10,17 +10,18 @@ const Tutor = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [tutor, setTuor] = useState();
+  const [tutor, setTutor] = useState();
   const [authConfig, setAuthConfig] = useAuthContext();
   const [comment, setComment]= useState("");
   const [comments, setComments]= useState();
 
+  const [mode, setMode] = useState('EDIT');
 
-  const [currentCourseData, setCurrentCourseData] = useState(null);
+  const [currentCourseData, setCurrentCourseData] = useState();
 
   const isEditable = authConfig?.isTutor; // true for tutor, false for student
 
-
+  const closeButtonRef = useRef();
 
   const addComment = async () => {
     try {
@@ -40,10 +41,27 @@ const Tutor = () => {
   const submitEditedData = (editedCourse) => async () => {
     try {
       const formData = new window.FormData();
+      formData.append('imageUrl', editedCourse.imageUrl);
       formData.append('name', editedCourse.name);
       formData.append('desc', editedCourse.desc);
-      formData.append('image', editedCourse.image);
-      await httpPost("/tutorapi/tutorCourse", formData);
+      if (editedCourse._id) {
+        formData.append('_id', editedCourse._id);
+      }
+
+      if (editedCourse.image) {
+        formData.append('image', editedCourse.image);
+      }
+
+      const URL = "/tutorapi/tutorCourse";
+      if (mode === 'CREATE') {
+        const data = await httpPost(URL, formData);
+        setTutor({...data});
+      } else {
+        const data = await httpPut(URL, formData);
+        setTutor({...data});
+      }
+      setCurrentCourseData({})
+      closeButtonRef.current.click();
     } catch (err) {
       console.log(err);
       // navigate("/error");
@@ -51,7 +69,7 @@ const Tutor = () => {
   };
 
   const resetModalData = () => {
-    setCurrentCourseData(null);
+    setCurrentCourseData({});
   }
 
   const updateCurrentCourse = (courseToEdit) => setCurrentCourseData(courseToEdit);
@@ -61,7 +79,7 @@ const Tutor = () => {
       try {
         const data = await httpGet(`/tutorapi/tutor/${params.id}`);
         console.log(data);
-        setTuor(data[0]);
+        setTutor(data[0]);
         const comments = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
         // console.log(comments);
         setComments(comments[0]);
@@ -139,19 +157,23 @@ const Tutor = () => {
       <div className="row home__row">
         {/* false :is tutor false:cannot edit */}
         <Card 
-          data={tutor.courses} 
-          isTutorData={false} 
-          isEditable={isEditable} 
-          currentCourseData={currentCourseData}
-          updateCurrentCourse={updateCurrentCourse} 
-          submitEditedData={submitEditedData} 
-          resetModalData={resetModalData}
+            data={tutor.courses} 
+            isTutorData={false} 
+            isEditable={isEditable}
+            mode={mode}
+            setMode={setMode}
+            closeButtonRef={closeButtonRef}
+            currentCourseData={currentCourseData}
+            updateCurrentCourse={updateCurrentCourse} 
+            submitEditedData={submitEditedData} 
+            resetModalData={resetModalData}
           />
         {isEditable ? (
           <div
             className="home__tutor col-lg-4"
             data-toggle="modal"
             data-target="#exampleModal"
+            onClick={() => setMode('CREATE')}
           >
             <div className="tutor__course__add">
               <div>
