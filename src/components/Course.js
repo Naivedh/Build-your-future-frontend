@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { httpGet } from "../utils/api";
+import { httpGet, httpPost } from "../utils/api";
 import Loader from "./Loader";
 
 
@@ -21,7 +21,8 @@ const Course = (props) => {
       try {
         const data = await httpGet(`/tutorapi/course/${params.id}?tutorId=${tutorId}`);
         setCourse(data);
-        console.log(data)
+        const enrollData = await httpGet(`/studentapi/studentCourse/${params.id}`);
+        setIsEnroll(enrollData);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -42,10 +43,24 @@ const Course = (props) => {
     return "";
   }
 
-  const changeEnroll = () => {
-    setIsEnroll(true);
+  const changeEnroll = async() => {
+    setLoading(true);
+    try {
+      let data ={
+        tutorId,
+       courseId: params.id
+      }
+      data = await httpPost("/studentapi/studentCourse", data);
+      setIsEnroll(true);
+      console.log(data)
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
 
   };
+
+  //not neede make in tutor
   const changeFavourite = () => {
     setIsFavourite(!isFavourite);
   };
@@ -104,7 +119,7 @@ const Course = (props) => {
                   Enroll
                 </button>
               </div>
-            ) : null}
+            ) :  <p>You are Enrolled!</p>}
             <br />
             {isEnroll ? (
               <div>
@@ -126,7 +141,7 @@ const Course = (props) => {
                   appointment
                 </button>
               </div>
-            ) : null}
+            ) :null}
           </div>
 
           {/* <p className="tutor__tutor__about">{tutor.about}</p>
