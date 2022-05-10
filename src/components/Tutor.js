@@ -147,8 +147,9 @@ const Tutor = () => {
         </div>
         <div className="col-lg-6">
           <p className="tutor__tutor__name">{tutor.name}</p>
-          <p className="tutor__tutor__about">{tutor.about}</p>
-          <p className="tutor__tutor__desc">{tutor.desc}</p>
+          <p className="tutor__tutor__about"><b>About: </b>{tutor.about}</p>
+          <p className="tutor__tutor__desc"><b>Description: </b>{tutor.desc}</p>
+          <p className="tutor__tutor__desc"><b>Total Hours Tutored: </b> {tutor.hoursTutored} Hours</p>
         </div>
       </div>
       <div className="row course__heading">
