@@ -1,28 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../context/AuthContextProvider";
 import "../css/Appointment.css";
 import { httpGet } from "../utils/api";
 import Loader from "./Loader";
+
 const Appointment = () => {
   const [loading, setLoading] = useState(true);
-  const [appointment, setAppointment] = useState();
-  const [authConfig, setAuthConfig] = useAuthContext();
-
-  const isEditable = authConfig?.isTutor; // true for tutor, false for student
-  const url = isEditable
-    ? `/tutor/${authConfig._id}`
-    : `/student/${authConfig._id}`;
+  const [appointments, setAppointments] = useState();
     
   useEffect(() => {
     (async () => {
       try {
-        const data = await httpGet(`/appointmentapi${url}`);
-        // console.log(data);
-        setAppointment(data);
-        setLoading(false);
+        const { appointments, serverTimestamp } = await httpGet(`/appointmentapi/appointments`);
+        const preparedAppointments = [];
+
+        appointments.forEach(appointment => {
+          appointment.timeSlot.forEach(time => {
+            const appointmentData = { ...appointment, timeSlot: null, ...time }
+            if (appointmentData.end < serverTimestamp && time.status !== 'CANCELLED') {
+              appointmentData.status = 'INACTIVE';
+            }
+            preparedAppointments.push(appointmentData);
+          });
+        });
+        console.log({ preparedAppointments });
+        setAppointments(preparedAppointments);
       } catch (err) {
         console.log(err);
-        // navigate("/error");
       }
+      setLoading(false);
     })();
   }, []);
 
