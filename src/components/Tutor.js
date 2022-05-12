@@ -82,11 +82,22 @@ const Tutor = () => {
     setCurrentCourseData({});
   }
 
-  const changeFavourite = () => {
-    setIsFavourite(!isFavourite);
+
+  //get requestor for favourite by id
+
+  const changeFavourite = async() => {
+    try {
+      let data ={
+        tutorId:tutor._id
+      }
+      data = await httpPost("/studentapi/studentFavourite", data);
+      setIsFavourite(!isFavourite);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  
+
   const updateCurrentCourse = (courseToEdit) => setCurrentCourseData(courseToEdit);
 
   useEffect(() => {
@@ -103,6 +114,9 @@ const Tutor = () => {
           }
         })
         setComments(commentData);
+
+        const fav = await httpGet(`/studentapi/studentFavourite/${data[0]._id}`);
+        setIsFavourite(!fav);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -113,8 +127,6 @@ const Tutor = () => {
   if (tutor === undefined) {
     return "";
   }
-
-
 
   const commentCard = (comment) => {
     return (
