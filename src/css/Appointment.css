@@ -46,6 +46,15 @@
     padding: .3rem;
     border-radius: 2%;
 }
+.plus, .cancel{
+    padding: .5rem;
+}
+.plus{
+    color: rgb(35, 129, 210);
+}
+.cancel{
+    color: rgb(211, 13, 13);
+}
 @media only screen and (max-width: 980px) {
     .appointment__main__row{
         display: none;

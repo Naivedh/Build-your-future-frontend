@@ -11,7 +11,7 @@ const Tutor = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [tutor, setTutor] = useState();
-  const [authConfig, setAuthConfig] = useAuthContext();
+  const [authConfig] = useAuthContext();
   const [comment, setComment]= useState({});
   const [comments, setComments]= useState();
   const [savingComment, setSavingComment] = useState(false);
@@ -89,7 +89,7 @@ const Tutor = () => {
         setTutor(data[0]);
         const [commentData] = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
         // console.log(comments);
-        commentData.responses.forEach(response => {
+        commentData?.responses.forEach(response => {
           if (response.studentId === authConfig._id) {
             setShowAddComment(false);
           }
