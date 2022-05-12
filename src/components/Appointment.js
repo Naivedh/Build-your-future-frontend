@@ -57,6 +57,13 @@ const Appointment = () => {
   if (loading) {
     return <Loader />;
   }
+  if (!appointments.length) {
+    return (
+      <div className="container m-3 text-center">
+        <h2>No appointments Yet</h2>
+      </div>
+    );
+  }
   return (
     <div className="row m-3 p-5">
       <div className="col-lg-12">
