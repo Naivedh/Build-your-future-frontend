@@ -89,7 +89,7 @@ const Tutor = () => {
         setTutor(data[0]);
         const [commentData] = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
         // console.log(comments);
-        commentData.responses.forEach(response => {
+        commentData?.responses.forEach(response => {
           if (response.studentId === authConfig._id) {
             setShowAddComment(false);
           }
