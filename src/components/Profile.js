@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContextProvider";
 import "../css/SignUp.css";
-import { httpGet, httpPost } from "../utils/api";
+import { httpGet, httpPost, httpPut } from "../utils/api";
 import Loader from "./Loader";
 
 const Profile = () => {
@@ -11,19 +11,25 @@ const Profile = () => {
   const [about, setAbout] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState();
-  const [workingHourStart, setWorkingHourStart] = useState("");
-  const [workingHourEnd, setWorkingHourEnd] = useState("");
+  const [workingHourStart, setWorkingHourStart] = useState();
+  const [workingHourEnd, setWorkingHourEnd] = useState();
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [authConfig] = useAuthContext();
   const isTutor = authConfig?.isTutor; // true for tutor, false for student
 
-  const url = isTutor?`/tutorapi/tutor/${authConfig?._id}`:`/studentapi/student/${authConfig?._id}`;
+  const url = isTutor?"/tutorapi/tutor/":"/studentapi/student/";
   useEffect(() => {
     (async () => {
       try {
-        const data = await httpGet(url);
-        console.log(data);
+        const data = await httpGet(url+authConfig?._id);
+        // console.log(data)
+        setEmail(data[0].email)
+        setName(data[0].name)
+        setAbout(data[0].about)
+        setDesc(data[0].desc)
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -32,46 +38,63 @@ const Profile = () => {
   }, []);
 
   //test update
-  const submitUpdate = () => {
-    
+  const submitUpdate = async (e) => {
+    setLoading(true);
+    try {
+      if (error) {
+        setError(null);
+      }
+      e.preventDefault();
+      const commonKeys = {
+        "email": email,
+        "password": password,
+        "name": name,
+        "desc": desc,
+        "about":about
+      };
+
+      const formData = new window.FormData();
+
+      Object.keys(commonKeys).forEach(k => {
+        formData.append(`${k}`, commonKeys[k]);
+      });
+
+      
+      if (password && !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(password)) {
+        setError({ message: 'Password must contain: minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character' });
+        return;
+      }
+
+      // let startDate = new Date();
+      // let endDate = new Date();
+
+      // const [startHour, startMinute] = workingHourStart.split(":");
+      // const [endHour, endMinute] = workingHourEnd.split(":");
+
+      // startDate.setHours(Number(startHour), Number(startMinute), 0);
+      // endDate.setHours(Number(endHour), Number(endMinute), 0);
+
+      formData.append('image', image);
+
+      // if (isTutor) {
+      //   formData.append('workingHourStart', startDate.getTime());
+      //   formData.append('workingHourEnd', endDate.getTime());
+      // }
+
+      const data = await httpPut(url, formData);
+      console.log(data)
+      setEmail(data.email)
+      setName(data.name)
+      setAbout(data.about)
+      setDesc(data.desc)
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+      setError(err);
+    }
+    setLoading(false);
   };
-  // const submitSignUpData = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     const commonKeys = {
-  //       "email": email,
-  //       "password": password,
-  //       "name": name,
-  //       "desc": desc
-  //     };
-
-  //     const formData = new window.FormData();
-
-  //     Object.keys(commonKeys).forEach(k => {
-  //       formData.append(`${k}`, commonKeys[k]);
-  //     });
-
-  //     let startDate = new Date();
-  //     let endDate = new Date();
-
-  //     const [startHour, startMinute] = workingHourStart.split(":");
-  //     const [endHour, endMinute] = workingHourEnd.split(":");
-
-  //     startDate.setHours(Number(startHour), Number(startMinute), 0);
-  //     endDate.setHours(Number(endHour), Number(endMinute), 0);
-
-  //     if (isTutor) {
-  //       formData.append('workingHourStart', startDate.getTime());
-  //       formData.append('workingHourEnd', endDate.getTime());
-  //       formData.append('image', image);
-  //     }
-
-  //     const data = await httpPost("/tutorapi/postTutorSignUp", formData);
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   if (loading) {
     return <Loader />;
@@ -86,6 +109,9 @@ const Profile = () => {
               <h2>Profile</h2>
 
               <form className="signup__signup__form__container" id="f1">
+              {error ? <div className="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
+              </div> : null }
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input
@@ -165,7 +191,7 @@ const Profile = () => {
                 <br />
 
                 {/* tutor */}
-                {!isTutor ? (
+                {/* {isTutor ? (
                   <div className="form-group">
                     <div className="form-group">
                       <label htmlFor="starthr">Starting Time</label>
@@ -192,13 +218,13 @@ const Profile = () => {
                       />
                     </div>
                   </div>
-                ) : null}
+                ) : null} */}
 
                 <div className="m-t-lg">
                   <ul className="list-inline">
                     <li>
                       <input
-                        className="btn btn--form"
+                        className="btn btn-light"
                         type="submit"
                         value="Update"
                         onClick={submitUpdate}

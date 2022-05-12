@@ -39,15 +39,18 @@ const Appointment = () => {
     })();
   }, []);
 
-  const handleCancel = () => {
-
-  }
-  const handleAdd = () => {
-    
-  }
+  const handleCancel = () => {};
+  const handleAdd = () => {};
 
   if (loading) {
     return <Loader />;
+  }
+  if (!appointments.length) {
+    return (
+      <div className="container m-3 text-center">
+        <h2>No appointments Yet</h2>
+      </div>
+    );
   }
   return (
     <div className="row m-3 p-5">
@@ -117,9 +120,17 @@ const Appointment = () => {
                 </p>
               </div>
               {appointment.status === "ACTIVE" ? (
-                <div className="col-lg-1" style={{fontSize:"22px"}}>
-                  {isTutor?<i className="bi bi-calendar-plus plus" onClick={handleAdd}></i>:null}
-                  <i className="bi bi-calendar-x cancel" onClick={handleCancel}></i>
+                <div className="col-lg-1" style={{ fontSize: "22px" }}>
+                  {isTutor ? (
+                    <i
+                      className="bi bi-calendar-plus plus"
+                      onClick={handleAdd}
+                    ></i>
+                  ) : null}
+                  <i
+                    className="bi bi-calendar-x cancel"
+                    onClick={handleCancel}
+                  ></i>
                 </div>
               ) : null}
             </div>
