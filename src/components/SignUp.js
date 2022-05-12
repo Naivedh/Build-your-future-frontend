@@ -75,7 +75,6 @@ const SignUp = () => {
   return (
     
     <div className="container signup__container">
-    
             <div className="container__child signup__form">
               <h2>Sign Up</h2>
 

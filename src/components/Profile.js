@@ -59,8 +59,8 @@ const Profile = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-lg-6">
-          <div className="signup__signup__image__container">
+        <div className="col-lg-12">
+          <div className="container signup__container">
             <div className="container__child signup__form">
               <h2>Profile</h2>
 
