@@ -12,29 +12,36 @@ const Tutor = () => {
   const [loading, setLoading] = useState(true);
   const [tutor, setTutor] = useState();
   const [authConfig, setAuthConfig] = useAuthContext();
-  const [comment, setComment]= useState("");
+  const [comment, setComment]= useState({});
   const [comments, setComments]= useState();
-
+  const [savingComment, setSavingComment] = useState(false);
   const [mode, setMode] = useState('EDIT');
-
+  
   const [currentCourseData, setCurrentCourseData] = useState();
+  const [showAddComment, setShowAddComment] = useState(true);
 
   const isEditable = authConfig?.isTutor; // true for tutor, false for student
 
   const closeButtonRef = useRef();
 
+  const commentDialogCloseButtonRef = useRef();
+
   const addComment = async () => {
     try {
+      setSavingComment(true);
       const data={
+        ...comment,
         tutorId:tutor._id,
-        text:comment,
       }
-      let newData = await httpPost("/feedbackapi/feedback", data);
-      setComments(newData)
+      const newData = await httpPost("/feedbackapi/feedback", data);
+      setComments(newData);
+      setShowAddComment(false);
+      commentDialogCloseButtonRef.current.click();
     } catch (err) {
       console.log(err);
       // navigate("/error");
     }
+    setSavingComment(false);
   }
 
   //for tutor update
@@ -80,9 +87,14 @@ const Tutor = () => {
         const data = await httpGet(`/tutorapi/tutor/${params.id}`);
         // console.log(data);
         setTutor(data[0]);
-        const comments = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
+        const [commentData] = await httpGet(`/feedbackapi/feedbacks/${params.id}`);
         // console.log(comments);
-        setComments(comments[0]);
+        commentData.responses.forEach(response => {
+          if (response.studentId === authConfig._id) {
+            setShowAddComment(false);
+          }
+        })
+        setComments(commentData);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -189,42 +201,113 @@ const Tutor = () => {
 
       <div className="row">
         <p className="course__heading">Comments</p>
-        
-        {!isEditable?(
-          <div className="row px-5 py-2 mx-5">
-            <label htmlFor="courseName" className="py-2 px-3">Add Comment</label>
-            <div className="col-10">
-              <div className="form-group">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="comment"
-                  id="comment"
-                  placeholder="Great one"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            <div className="col-2">
-            <button
-                type="button"
-                className="btn btn-primary"
-                onClick={addComment}
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        ):null}
 
         <div className="course__comment__card">
-            {comments.responses.length
-            ?comments.responses.map((comment)=>commentCard(comment))
+            {comments?.responses?.length
+            ?comments?.responses?.map((comment)=>commentCard(comment))
             :<p className="text-center">No comments yet</p>}
         </div>
+        {!isEditable && showAddComment ?(
+          <div className="d-flex py-2 justify-content-center">
+              <button
+                type="button"
+                data-toggle="modal"
+                data-target="#commentModal"
+                data-backdrop={"static"} 
+                data-keyboard={"false"}
+                className="btn btn-primary"
+              >
+                Add a comment
+              </button>
+          </div>
+        ):null}
       </div>
+
+      <div
+          className="modal fade"
+          id="commentModal"
+          tabIndex="-1"
+          role="dialog"
+          // aria-labelledby="exampleModalLabel"
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">
+                  Give feedback
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  ref={commentDialogCloseButtonRef}
+                  onClick={(e) => setComment({})}
+                />
+              </div>
+              <div className="modal-body">
+                <div className="form-group">
+                  <label htmlFor="comment">Comment</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="comment"
+                    id="comment"
+                    placeholder="Your comment"
+                    value={comment?.text}
+                    onChange={(e) =>
+                      setComment({ ...comment, text: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <label htmlFor="rating" className="form-label">Rating</label>
+                <div className="d-flex justify-content-between">
+                <div className="w-60">
+                <input 
+                  type="range" 
+                  className="form-range" 
+                  min="0" 
+                  max="5" 
+                  step="0.5" 
+                  id="rating" 
+                  defaultValue={1} 
+                  value={comment?.rating} 
+                  onChange={(e) => setComment({ ...comment, rating: e.target.value })}
+                />
+                </div>
+                <div className="w-20">
+                <input 
+                  type="number"
+                  disabled
+                  defaultValue={1}
+                  value={comment?.rating}
+                />
+                </div>
+                </div>
+               </div>
+              <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-dismiss="modal"
+                disabled={savingComment}
+                onClick={(e) => setComment({})}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                disabled={savingComment}
+                className="btn btn-success"
+                onClick={addComment}
+              >
+                {savingComment ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" /> : 'Comment'}
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 };
