@@ -35,14 +35,19 @@
     border-radius: 2%;
 }
 /* temprory */
-.appointment__cancel{
+.appointment__cancelled{
     background-color: rgb(209, 68, 68);
+    padding: .3rem;
+    border-radius: 2%;
+}
+.appointment__accepted {
+    background-color: rgb(66, 112, 205);;
     padding: .3rem;
     border-radius: 2%;
 }
 
 .appointment__inactive{
-    background-color: rgb(66, 112, 205);;
+    background-color: #ffc107;
     padding: .3rem;
     border-radius: 2%;
 }
