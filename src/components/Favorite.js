@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import "../css/Tutor_Course.css";
 import "../css/Home.css";
 import "../css/Card.css";
@@ -15,7 +14,7 @@ const Favourite = () => {
     (async () => {
       try {
         const data = await httpGet(`/studentapi/studentFavourite`);
-        // console.log(data);
+        console.log(data);
         setFavourite(data);
         setLoading(false);
       } catch (err) {
@@ -24,11 +23,12 @@ const Favourite = () => {
     })();
   }, []);
 
-  const handleFavourite = async(courseId) => {
+  const handleFavourite = async(tutorId) => {
     setLoading(true)
     try {
-      const data = await httpPost(`/studentapi/studentFavourite`,{courseId});
-      setFavourite(data);
+      const data = await httpPost(`/studentapi/studentFavourite`,{tutorId});
+      if(data)
+        setFavourite(favourite.filter((fav)=>fav.tutorId!==tutorId))
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -42,28 +42,29 @@ const Favourite = () => {
   return (
     <div className="container">
       <div className="row home__row">
-       {
-          favourite.map((course)=>
-          <div className="col-lg-4" key={course._id}>
+       {  favourite.length?favourite.map((fav)=>
+          <div className="col-lg-4" key={fav._id}>
             <div className="card__content card__content__nohover">
               <div className="row justify-content-end"></div>
               <div className="row justify-content-center">
                 <img
-                  src={course.courseImageUrl}
-                  alt={course.courseName}
+                  src={fav.tutorImageUrl}
+                  alt={fav.tutorName}
                   className="rounded-circle home__portrait"
                 />
-                <h5>{course.courseName}</h5>
+                <h5>{fav.tutorName}</h5>
                 <p></p>
-                <Link to={`/course/${course.courseId}`}>
+                <Link to={`/tutor/${fav.tutorId}`}>
                   <p className="btn btn-secondary card__button">View details »</p>
                 </Link>
                 
-                <p className="btn btn-danger" onClick={()=>handleFavourite(course.courseId)}>Remove Course</p>
+                <p className="btn btn-danger" onClick={()=>handleFavourite(fav.tutorId)}>Remove Favourite</p>
               </div>
             </div>
           </div>
-          )
+          ):<div className="container text-center">
+            <h2>No Favourite's Yet</h2>
+          </div>
        }
       </div>
     </div>

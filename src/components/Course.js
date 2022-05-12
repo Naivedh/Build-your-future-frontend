@@ -10,9 +10,9 @@ const Course = (props) => {
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState({});
   const [isEnroll, setIsEnroll] = useState(false);
-  const [isFavourite, setIsFavourite] = useState(false);
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
+  const [isFavourite, setIsFavourite] = useState(false);
   
   const { tutorId } = useLocation().state;
 
@@ -26,7 +26,6 @@ const Course = (props) => {
         setLoading(false);
       } catch (err) {
         console.log(err);
-        // navigate("/error");
       }
     })();
   }, []);
@@ -60,11 +59,10 @@ const Course = (props) => {
 
   };
 
-  //not neede make in tutor
   const changeFavourite = () => {
     setIsFavourite(!isFavourite);
+    
   };
-
   
   if (loading) {
     return <Loader/>;
