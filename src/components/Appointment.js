@@ -118,8 +118,8 @@ const Appointment = () => {
               </div>
               {appointment.status === "ACTIVE" ? (
                 <div className="col-lg-1" style={{fontSize:"22px"}}>
-                  <i className="bi bi-calendar-plus plus" onClick={handleAdd}></i>
-                  {isTutor?<i className="bi bi-calendar-x cancel" onClick={handleCancel}></i>:null}
+                  {isTutor?<i className="bi bi-calendar-plus plus" onClick={handleAdd}></i>:null}
+                  <i className="bi bi-calendar-x cancel" onClick={handleCancel}></i>
                 </div>
               ) : null}
             </div>

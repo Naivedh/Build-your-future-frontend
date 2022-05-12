@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuthContext } from "../context/AuthContextProvider";
 import "../css/SignUp.css";
-import { httpPost } from "../utils/api";
-import Card from "./Card";
-import { useTutor } from "../TutorContextProvider";
-
+import { httpGet, httpPost } from "../utils/api";
+import Loader from "./Loader";
 
 const Profile = () => {
-    const data = useTutor();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -15,46 +13,69 @@ const Profile = () => {
   const [image, setImage] = useState();
   const [workingHourStart, setWorkingHourStart] = useState("");
   const [workingHourEnd, setWorkingHourEnd] = useState("");
-  const [isTutor, ] = useState(false);
-  const tutor = data.instructors.find((tutor) => tutor._id === "1");
-  console.log(tutor)
-  const submitSignUpData = async (e) => {
-    try {
-      e.preventDefault();
-      const commonKeys = {
-        "email": email, 
-        "password": password,
-        "name": name, 
-        "desc": desc
-      };
 
-      const formData = new window.FormData();
+  const [loading, setLoading] = useState(true);
+  const [authConfig] = useAuthContext();
+  const isTutor = authConfig?.isTutor; // true for tutor, false for student
 
-      Object.keys(commonKeys).forEach(k => {
-        formData.append(`${k}`, commonKeys[k]);
-      });
-
-      let startDate = new Date();
-      let endDate = new Date();
-
-      const [startHour, startMinute] = workingHourStart.split(":");
-      const [endHour, endMinute] = workingHourEnd.split(":");
-
-      startDate.setHours(Number(startHour), Number(startMinute), 0);
-      endDate.setHours(Number(endHour), Number(endMinute), 0);
-
-      if (isTutor) {
-        formData.append('workingHourStart', startDate.getTime());
-        formData.append('workingHourEnd', endDate.getTime());
-        formData.append('image', image);
+  const url = isTutor?`/tutorapi/tutor/${authConfig?._id}`:`/studentapi/student/${authConfig?._id}`;
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await httpGet(url);
+        console.log(data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
       }
-      
-      const data = await httpPost("/tutorapi/postTutorSignUp", formData);
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
+    })();
+  }, []);
+
+  //test update
+  const submitUpdate = () => {
+    
   };
+  // const submitSignUpData = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     const commonKeys = {
+  //       "email": email,
+  //       "password": password,
+  //       "name": name,
+  //       "desc": desc
+  //     };
+
+  //     const formData = new window.FormData();
+
+  //     Object.keys(commonKeys).forEach(k => {
+  //       formData.append(`${k}`, commonKeys[k]);
+  //     });
+
+  //     let startDate = new Date();
+  //     let endDate = new Date();
+
+  //     const [startHour, startMinute] = workingHourStart.split(":");
+  //     const [endHour, endMinute] = workingHourEnd.split(":");
+
+  //     startDate.setHours(Number(startHour), Number(startMinute), 0);
+  //     endDate.setHours(Number(endHour), Number(endMinute), 0);
+
+  //     if (isTutor) {
+  //       formData.append('workingHourStart', startDate.getTime());
+  //       formData.append('workingHourEnd', endDate.getTime());
+  //       formData.append('image', image);
+  //     }
+
+  //     const data = await httpPost("/tutorapi/postTutorSignUp", formData);
+  //     console.log(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="container">
@@ -75,7 +96,7 @@ const Profile = () => {
                     placeholder="james.bond@spectre.com"
                     value={email}
                     required
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -89,7 +110,7 @@ const Profile = () => {
                     required
                     autoComplete="on"
                     value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -102,7 +123,7 @@ const Profile = () => {
                     placeholder="enter name"
                     value={name}
                     required
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -114,7 +135,7 @@ const Profile = () => {
                     id="about"
                     placeholder="Please enter about you"
                     value={about}
-                    onChange={(e)=>setAbout(e.target.value)}
+                    onChange={(e) => setAbout(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -126,7 +147,7 @@ const Profile = () => {
                     id="description"
                     placeholder="Please enter your description"
                     value={desc}
-                    onChange={(e)=>setDesc(e.target.value)}
+                    onChange={(e) => setDesc(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -142,7 +163,6 @@ const Profile = () => {
                 </div>
 
                 <br />
-           
 
                 {/* tutor */}
                 {!isTutor ? (
@@ -156,7 +176,7 @@ const Profile = () => {
                         id="strathr"
                         placeholder="Please enter Starting hr"
                         value={workingHourStart}
-                        onChange={(e)=>setWorkingHourStart(e.target.value)}
+                        onChange={(e) => setWorkingHourStart(e.target.value)}
                       />
                     </div>
                     <div className="form-group">
@@ -168,7 +188,7 @@ const Profile = () => {
                         id="endhr"
                         placeholder="Please enter Ending hr"
                         value={workingHourEnd}
-                        onChange={(e)=>setWorkingHourEnd(e.target.value)}
+                        onChange={(e) => setWorkingHourEnd(e.target.value)}
                       />
                     </div>
                   </div>
@@ -181,10 +201,9 @@ const Profile = () => {
                         className="btn btn--form"
                         type="submit"
                         value="Update"
-                        onClick={submitSignUpData}
+                        onClick={submitUpdate}
                       />
                     </li>
-                   
                   </ul>
                 </div>
               </form>
@@ -192,15 +211,16 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div>
-      {!isTutor?(
-      <div className="row home__row">
-        {/* false :is tutor false:cannot edit */}
-        <Card data={tutor.courses} isTutorData={false} isEditable={false}/>
-        </div>):null};
-        </div>
+      {/* <div>
+        {!isTutor ? (
+          <div className="row home__row">
+            false :is tutor false:cannot edit
+            <Card data={tutor.courses} isTutorData={false} isEditable={false} />
+          </div>
+        ) : null}
+        ;
+      </div> */}
     </div>
-
   );
 };
 
