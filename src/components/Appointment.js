@@ -4,6 +4,17 @@ import "../css/Appointment.css";
 import { httpGet, httpPut } from "../utils/api";
 import Loader from "./Loader";
 
+const getClassNameBasedOnStatus = (status) => {
+  if (status === "ACTIVE") {
+    return "appointment__active"
+  } if (status === 'INACTIVE') {
+    return "appointment__inactive"
+  } if (status === 'CANCELLED') {
+    return "appointment__cancelled"
+  }
+  return "appointment__accepted"
+}
+
 const Appointment = () => {
   const [loading, setLoading] = useState(true);
   const [appointments, setAppointments] = useState();
@@ -35,8 +46,9 @@ const Appointment = () => {
             preparedAppointments.push(appointmentData);
           });
         });
+       
         // console.log({ preparedAppointments });
-        setAppointments(preparedAppointments);
+        setAppointments( preparedAppointments.sort((a, b) => b.start - a.start));
       } catch (err) {
         console.log(err);
       }
@@ -127,13 +139,7 @@ const Appointment = () => {
                 }
               >
                 <p
-                  className={
-                    appointment.status === "ACTIVE"
-                      ? "appointment__active"
-                      : appointment.status === "INACTIVE"
-                      ? "appointment__inactive"
-                      : "appointment__cancel"
-                  }
+                  className={getClassNameBasedOnStatus(appointment.status)}
                 >
                   {appointment.status}
                 </p>
