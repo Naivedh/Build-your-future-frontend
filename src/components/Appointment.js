@@ -21,6 +21,9 @@ const Appointment = () => {
   const [authConfig] = useAuthContext();
   const isTutor = authConfig?.isTutor; // true for tutor, false for student
 
+  const [error, setError] = useState(null);
+
+
   useEffect(() => {
     (async () => {
       try {
@@ -57,6 +60,7 @@ const Appointment = () => {
   }, []);
 
   const updateAppointment = (appointment, status) => async () => {
+    setError(null);
     try {
       const data = await httpPut(
         `/appointmentapi/appointment/${appointment.appointmentId}?slotId=${appointment._id}`,
@@ -71,6 +75,7 @@ const Appointment = () => {
       setAppointments(preparedAppointments);
     } catch (err) {
       console.log(err);
+      setError(err);
     }
   };
 
@@ -88,6 +93,9 @@ const Appointment = () => {
     <div className="row m-3 p-5">
       <div className="col-lg-12">
         <div className="appointment__list-group list-group">
+        {error ? <div className="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
+              </div> : null }
           <div className="appointment__main__row row">
             <div className="col-lg-4">
               <p>Name</p>
