@@ -5,6 +5,7 @@ import Card from "./Card";
 import { httpGet, httpPost, httpPut } from "../utils/api";
 import Loader from "./Loader";
 import { useAuthContext } from "../context/AuthContextProvider";
+import { BookAppointment } from "./BookAppointment";
 
 const Tutor = () => {
   const params = useParams();
@@ -192,15 +193,7 @@ const Tutor = () => {
                   {isFavourite ? <>Unfavourite</> : <>Favourite</>}
                 </button>
 
-                <button
-                  type="button"
-                  className="btn btn-secondary m-4"
-                  data-dismiss="modal"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  appointment
-                </button>
+                <BookAppointment tutorId={tutor?._id}/>
               </div>
             )}
         </div>
