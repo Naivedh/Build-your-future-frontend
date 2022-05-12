@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../context/AuthContextProvider";
 import "../css/Appointment.css";
-import { httpGet } from "../utils/api";
+import { httpGet, httpPut } from "../utils/api";
 import Loader from "./Loader";
 
 const Appointment = () => {
@@ -20,7 +20,7 @@ const Appointment = () => {
 
         appointments.forEach((appointment) => {
           appointment.timeSlot.forEach((time) => {
-            const appointmentData = { ...appointment, timeSlot: null, ...time };
+            const appointmentData = { ...appointment, appointmentId: appointment._id , timeSlot: null, ...time };
             if (
               appointmentData.end < serverTimestamp &&
               time.status !== "CANCELLED"
@@ -39,8 +39,20 @@ const Appointment = () => {
     })();
   }, []);
 
-  const handleCancel = () => {};
-  const handleAdd = () => {};
+ const updateAppointment = (appointment, status) => async () => {
+  try {
+    const data = await httpPut(`/appointmentapi/appointment/${appointment.appointmentId}?slotId=${appointment._id}`, { status })
+    const preparedAppointments = appointments.map(a => {
+      if (a._id === appointment._id) {
+        return { ...a, status };
+      }
+      return a;
+    });
+    setAppointments(preparedAppointments);
+  } catch (err) {
+    console.log(err);
+  }
+ }
 
   if (loading) {
     return <Loader />;
@@ -91,7 +103,7 @@ const Appointment = () => {
               <div className="col-lg-4">
                 <p>
                   {new Date(appointment.start).getHours().toString()}:
-                  {new Date(appointment.start).getMinutes().toString()}-
+                  {new Date(appointment.start).getMinutes().toString()}{' '} - {' '}
                   {new Date(appointment.end).getHours().toString()}:
                   {new Date(appointment.end).getMinutes().toString()}
                 </p>
@@ -112,25 +124,13 @@ const Appointment = () => {
                       : "appointment__cancel"
                   }
                 >
-                  {appointment.status === "ACTIVE"
-                    ? "ACTIVE"
-                    : appointment.status === "INACTIVE"
-                    ? "INACTIVE"
-                    : "CANCELLED"}
+                  {appointment.status}
                 </p>
               </div>
               {appointment.status === "ACTIVE" ? (
-                <div className="col-lg-1" style={{ fontSize: "22px" }}>
-                  {isTutor ? (
-                    <i
-                      className="bi bi-calendar-plus plus"
-                      onClick={handleAdd}
-                    ></i>
-                  ) : null}
-                  <i
-                    className="bi bi-calendar-x cancel"
-                    onClick={handleCancel}
-                  ></i>
+                <div className="col-lg-1" style={{fontSize:"22px"}}>
+                  {isTutor?<i className="bi bi-calendar-plus plus" onClick={updateAppointment(appointment, 'ACCEPTED')}></i>:null}
+                  <i className="bi bi-calendar-x cancel" onClick={updateAppointment(appointment, 'CANCELLED')}></i>
                 </div>
               ) : null}
             </div>
