@@ -121,27 +121,6 @@ const Course = (props) => {
               </div>
             ) :  <p>You are Enrolled!</p>}
             <br />
-            {isEnroll ? (
-              <div>
-                <button
-                  type="button"
-                  className="btn btn-warning m-4"
-                  data-dismiss="modal"
-                  onClick={changeFavourite}
-                >
-                  {isFavourite?(<>Unfavourite</>):(<>Favourite</>)}
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-secondary m-4"
-                  data-dismiss="modal"
-                  data-toggle="modal" data-target="#exampleModal"
-                >
-                  appointment
-                </button>
-              </div>
-            ) :null}
           </div>
 
           {/* <p className="tutor__tutor__about">{tutor.about}</p>
@@ -149,54 +128,7 @@ const Course = (props) => {
         </div>
       </div>
       
-      <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog" role="document">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Add Appointment</h5>
-        <button
-                type="button"
-                className="btn-close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-        </button>
-      </div>
-      <div className="modal-body">
-      <div className="form-group">
-                      <label htmlFor="starthr">Starting Time</label>
-                      <input
-                        className="form-control"
-                        type="number"
-                        min="0" max="23"
-                        name="Starting hr"
-                        id="strathr"
-                        placeholder="Please enter Starting hr"
-                        value={workingHourStart}
-                        onChange={(e)=>setWorkingHourStart(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="endhr">Ending Time</label>
-                      <input
-                        className="form-control"
-                        type="number"
-                        min="1" max="24"
-                        name="Ending hr"
-                        id="endhr"
-                        placeholder="Please enter Ending hr"
-                        value={workingHourEnd}
-                        onChange={(e)=>setWorkingHourEnd(e.target.value)}
-                      />
-                    </div>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
     </div>
   );
 };
