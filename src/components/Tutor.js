@@ -116,8 +116,10 @@ const Tutor = () => {
         })
         setComments(commentData);
 
-        const fav = await httpGet(`/studentapi/studentFavourite/${data[0]._id}`);
-        setIsFavourite(!fav);
+        if(!isEditable){
+          const fav = await httpGet(`/studentapi/studentFavourite/${data[0]._id}`);
+          setIsFavourite(!fav);
+        }
         setLoading(false);
       } catch (err) {
         console.log(err);
