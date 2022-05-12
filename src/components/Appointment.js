@@ -20,7 +20,12 @@ const Appointment = () => {
 
         appointments.forEach((appointment) => {
           appointment.timeSlot.forEach((time) => {
-            const appointmentData = { ...appointment, appointmentId: appointment._id , timeSlot: null, ...time };
+            const appointmentData = {
+              ...appointment,
+              appointmentId: appointment._id,
+              timeSlot: null,
+              ...time,
+            };
             if (
               appointmentData.end < serverTimestamp &&
               time.status !== "CANCELLED"
@@ -39,20 +44,23 @@ const Appointment = () => {
     })();
   }, []);
 
- const updateAppointment = (appointment, status) => async () => {
-  try {
-    const data = await httpPut(`/appointmentapi/appointment/${appointment.appointmentId}?slotId=${appointment._id}`, { status })
-    const preparedAppointments = appointments.map(a => {
-      if (a._id === appointment._id) {
-        return { ...a, status };
-      }
-      return a;
-    });
-    setAppointments(preparedAppointments);
-  } catch (err) {
-    console.log(err);
-  }
- }
+  const updateAppointment = (appointment, status) => async () => {
+    try {
+      const data = await httpPut(
+        `/appointmentapi/appointment/${appointment.appointmentId}?slotId=${appointment._id}`,
+        { status }
+      );
+      const preparedAppointments = appointments.map((a) => {
+        if (a._id === appointment._id) {
+          return { ...a, status };
+        }
+        return a;
+      });
+      setAppointments(preparedAppointments);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (loading) {
     return <Loader />;
@@ -102,10 +110,13 @@ const Appointment = () => {
               </div>
               <div className="col-lg-4">
                 <p>
-                  {new Date(appointment.start).getHours().toString()}:
-                  {new Date(appointment.start).getMinutes().toString()}{' '} - {' '}
-                  {new Date(appointment.end).getHours().toString()}:
-                  {new Date(appointment.end).getMinutes().toString()}
+                  {new Date(appointment.start).getDate()}/
+                  {new Date(appointment.start).getMonth()+1}/
+                  {new Date(appointment.start).getFullYear()}{"   "}   
+                  {new Date(appointment.start).getHours()}:
+                  {new Date(appointment.start).getMinutes()} -{" "}
+                  {new Date(appointment.end).getHours()}:
+                  {new Date(appointment.end).getMinutes()}
                 </p>
               </div>
               <div
@@ -128,9 +139,17 @@ const Appointment = () => {
                 </p>
               </div>
               {appointment.status === "ACTIVE" ? (
-                <div className="col-lg-1" style={{fontSize:"22px"}}>
-                  {isTutor?<i className="bi bi-calendar-plus plus" onClick={updateAppointment(appointment, 'ACCEPTED')}></i>:null}
-                  <i className="bi bi-calendar-x cancel" onClick={updateAppointment(appointment, 'CANCELLED')}></i>
+                <div className="col-lg-1" style={{ fontSize: "22px" }}>
+                  {isTutor ? (
+                    <i
+                      className="bi bi-calendar-plus plus"
+                      onClick={updateAppointment(appointment, "ACCEPTED")}
+                    ></i>
+                  ) : null}
+                  <i
+                    className="bi bi-calendar-x cancel"
+                    onClick={updateAppointment(appointment, "CANCELLED")}
+                  ></i>
                 </div>
               ) : null}
             </div>
