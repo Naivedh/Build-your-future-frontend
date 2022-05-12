@@ -51,9 +51,9 @@ const Navbar = (props) => {
          
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle"  to="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span className="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="bi bi-gear-wide-connected"></i>
-                </Link>
+                </span>
                 <div className="dropdown-menu" style={{right: "0", left: "auto", marginTop:".7rem"}} aria-labelledby="navbarDropdown">
                   {
                     isSignedIn
