@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../css/Tutor_Course.css";
 import Card from "./Card";
 import { httpGet, httpPost, httpPut } from "../utils/api";
@@ -8,7 +8,6 @@ import { useAuthContext } from "../context/AuthContextProvider";
 
 const Tutor = () => {
   const params = useParams();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [tutor, setTutor] = useState();
   const [authConfig] = useAuthContext();
@@ -16,9 +15,13 @@ const Tutor = () => {
   const [comments, setComments]= useState();
   const [savingComment, setSavingComment] = useState(false);
   const [mode, setMode] = useState('EDIT');
+  const [isFavourite, setIsFavourite] = useState(false);
+
   
   const [currentCourseData, setCurrentCourseData] = useState();
   const [showAddComment, setShowAddComment] = useState(true);
+
+  const [error, setError] = useState(null);
 
   const isEditable = authConfig?.isTutor; // true for tutor, false for student
 
@@ -39,7 +42,7 @@ const Tutor = () => {
       commentDialogCloseButtonRef.current.click();
     } catch (err) {
       console.log(err);
-      // navigate("/error");
+      setError(err);
     }
     setSavingComment(false);
   }
@@ -71,7 +74,7 @@ const Tutor = () => {
       closeButtonRef.current.click();
     } catch (err) {
       console.log(err);
-      // navigate("/error");
+      setError(err);
     }
   };
 
@@ -79,6 +82,11 @@ const Tutor = () => {
     setCurrentCourseData({});
   }
 
+  const changeFavourite = () => {
+    setIsFavourite(!isFavourite);
+  };
+
+  
   const updateCurrentCourse = (courseToEdit) => setCurrentCourseData(courseToEdit);
 
   useEffect(() => {
@@ -98,7 +106,6 @@ const Tutor = () => {
         setLoading(false);
       } catch (err) {
         console.log(err);
-        // navigate("/error");
       }
     })();
   }, []);
@@ -162,6 +169,28 @@ const Tutor = () => {
           <p className="tutor__tutor__about"><b>About: </b>{tutor.about}</p>
           <p className="tutor__tutor__desc"><b>Description: </b>{tutor.desc}</p>
           <p className="tutor__tutor__desc"><b>Total Hours Tutored: </b> {tutor.hoursTutored} Hours</p>
+          {(
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-warning m-4"
+                  data-dismiss="modal"
+                  onClick={changeFavourite}
+                >
+                  {isFavourite ? <>Unfavourite</> : <>Favourite</>}
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-secondary m-4"
+                  data-dismiss="modal"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  appointment
+                </button>
+              </div>
+            )}
         </div>
       </div>
       <div className="row course__heading">
@@ -181,6 +210,7 @@ const Tutor = () => {
             updateCurrentCourse={updateCurrentCourse} 
             submitEditedData={submitEditedData} 
             resetModalData={resetModalData}
+            error={error}
           />
         {isEditable ? (
           <div
@@ -246,6 +276,9 @@ const Tutor = () => {
                 />
               </div>
               <div className="modal-body">
+              {error ? <div className="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
+              </div> : null }
                 <div className="form-group">
                   <label htmlFor="comment">Comment</label>
                   <input

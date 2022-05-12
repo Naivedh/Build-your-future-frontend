@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../context/AuthContextProvider";
 import "../css/SignUp.css";
-import { httpGet, httpPost, httpPut } from "../utils/api";
+import { httpGet, httpPut } from "../utils/api";
 import Loader from "./Loader";
 
 const Profile = () => {
@@ -11,8 +11,8 @@ const Profile = () => {
   const [about, setAbout] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState();
-  const [workingHourStart, setWorkingHourStart] = useState();
-  const [workingHourEnd, setWorkingHourEnd] = useState();
+  // const [workingHourStart, setWorkingHourStart] = useState();
+  // const [workingHourEnd, setWorkingHourEnd] = useState();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

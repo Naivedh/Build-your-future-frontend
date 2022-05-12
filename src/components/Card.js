@@ -14,7 +14,7 @@ const renderCourseNames = (courses) => {
   return courseName;
 };
 
-const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEditable, submitEditedData, updateCurrentCourse, currentCourseData, resetModalData }) => {
+const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEditable, submitEditedData, updateCurrentCourse, currentCourseData, resetModalData, error }) => {
 
   const courseEditHandler = (course) => (e) => {
     setMode('EDIT');
@@ -118,8 +118,11 @@ const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEdit
                 ></button>
               </div>
               <div className="modal-body">
+              {error ? <div className="alert alert-danger p-2" role="alert">
+               {error.response?.data?.message || error.message}
+              </div> : null }
                 <div className="form-group">
-                  <label htmlFor="course_name">Course Name</label>
+                  <label htmlFor="course_name" className="card__text">Course Name</label>
                   <input
                     className="form-control"
                     type="text"
@@ -135,7 +138,7 @@ const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEdit
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="descripton">Descripton</label>
+                  <label htmlFor="descripton" className="card__text">Descripton</label>
                   <textarea
                     className="form-control"
                     type="text"
@@ -149,7 +152,7 @@ const Card = ({data, isTutorData, tutorId, closeButtonRef, mode, setMode, isEdit
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="photo">Picture</label>
+                  <label htmlFor="photo" className="card__text">Picture</label>
                   <input
                     className="form-control"
                     type="file"
